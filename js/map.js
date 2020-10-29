@@ -24,9 +24,21 @@ function initAutocomplete() {
       map,
       anchorPoint: new google.maps.Point(0, -29),
     });
+    const circle = new google.maps.Circle({
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#FF0000",
+        fillOpacity: 0.35,
+        map,
+        center: { lat: 0, lng: 0},
+        radius: 8046.72,
+      });
+
     autocomplete.addListener("place_changed", () => {
       marker.setVisible(false);
       const place = autocomplete.getPlace();
+      circle.setVisible(false);
   
       if (!place.geometry) {
         // User entered the name of a Place that was not suggested and
@@ -44,5 +56,7 @@ function initAutocomplete() {
       }
       marker.setPosition(place.geometry.location);
       marker.setVisible(true);
+      circle.setCenter(place.geometry.location);
+      circle.setVisible(true);
     });
   }
