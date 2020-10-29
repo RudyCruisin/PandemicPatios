@@ -4,15 +4,18 @@ function initAutocomplete() {
         // open map with center on Atlanta
         center: { lat: 33.7537, lng: -84.3863  },
         zoom: 13,
+        fullscreenControl: false
     });
-    const card = document.getElementById("pac-card");
+    const searchCard = document.getElementById("pac-card");
+    const weatherCard = document.getElementById("weather-card");
     const input = document.getElementById("pac-input");
     // restrict to only cities in the US
     const options = {
         types: ['(regions)'],
         componentRestrictions: {country: 'us'}
       };
-    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(searchCard);
+    map.controls[google.maps.ControlPosition.LEFT_TOP].push(weatherCard);
     const autocomplete = new google.maps.places.Autocomplete(input, options);
     // Bind the map's bounds (viewport) property to the autocomplete object,
     // so that the autocomplete requests use the current map bounds for the
@@ -41,7 +44,7 @@ function initAutocomplete() {
         fillOpacity: 0.15,
         map,
         center: { lat: 0, lng: 0},
-        radius: 8046.72,
+        radius: 8046.72,  // in meters, so this is technically ~5 miles
       });
 
     autocomplete.addListener("place_changed", () => {
@@ -67,5 +70,33 @@ function initAutocomplete() {
       marker.setVisible(true);
       circle.setCenter(place.geometry.location);
       circle.setVisible(true);
+      
+      // SET LAT & LONG FOR WEATHER API
+      const lat = place.geometry.location.lat();
+      const long = place.geometry.location.lng();
+
+      function getWeather() {
+        fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            drawWeather(data);
+        })
+        .catch(err => console.log(err))
+      }
+
+      getWeather();
+
+      function drawWeather(data) {
+        let roundedTemp = Math.round(parseFloat(data.main.temp))
+        let iconcode = data.weather[0].icon;
+        let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+ 
+        document.getElementById('weather-icon').src = iconurl;
+        document.getElementById('location').innerHTML = data.name;
+        document.getElementById('description').innerHTML = data.weather[0].description;
+        document.getElementById('temp').innerHTML = roundedTemp + '&#8457;';
+        document.getElementById('humidity').innerHTML = data.main.humidity + '% Humidity';
+    }
     });
   }
