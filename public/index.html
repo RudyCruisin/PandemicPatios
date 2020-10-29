@@ -45,10 +45,30 @@
       </ul>
     </div>
   </nav>
-  <h1>PANDEMIC PATIOS</h1>
-  <div>
-    <input type="text" placeholder="Search.." />
+  <div class="pac-card" id="pac-card">
+    <div>
+        <div id="title">Search by City to Find Patios</div>
+    </div>
+    <div id="pac-container">
+        <input id="pac-input" type="text" placeholder="Enter a City..." />
+    </div>
   </div>
+  <div id="restaurants-map"></div>
+  <div id="footer">
+    <p id="copyright">
+      Copyright &copy;
+      <script>
+        document.write(new Date().getFullYear());
+      </script>
+      <br />
+      Pandemic Patios
+    </p>
+  </div>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDylyELTw5HP6i0KIEp7jyIWTva_SdH2IQ&callback=initAutocomplete&libraries=places&v=weekly"
+    defer
+  ></script>
   <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -65,4 +85,5 @@
     crossorigin="anonymous"
   ></script>
   <script src="../js/app.js"></script>
+  <script src="../js/map.js"></script>
 </body>
