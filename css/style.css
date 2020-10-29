@@ -19,8 +19,8 @@ font-size: 15px;
 font-weight: 300;
 }
 
-.pac-card {
-    margin: 10px 10px 0 0;
+.pac-card, .weather-card {
+    margin: 10px 10px;
     border-radius: 2px 0 0 2px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -30,7 +30,7 @@ font-weight: 300;
     font-family: Roboto;
   }
 
-#pac-container {
+#pac-container, #weather-container {
 padding-bottom: 12px;
 margin-right: 12px;
 }
@@ -51,12 +51,29 @@ width: 250px;
 border-color: #343b3f;
 }
 
-#title {
+#title, #weather-title {
 color: #fff;
 background-color: #343b3f;
 font-size: 25px;
 font-weight: 500;
 padding: 6px 12px;
+}
+
+#weather-container {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin: 0;
+}
+
+#location, #icon, #description, #temp, #humidity {
+    font-size: 18px;
+    padding: 1px 10px;
+    margin: 0;
+}
+
+#weather-icon {
+    height: 50px;
+    width: 50px;
 }
 
 #target {
