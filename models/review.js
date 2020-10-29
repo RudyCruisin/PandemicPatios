@@ -14,8 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Review.init({
-    restaurantID: DataTypes.INTEGER,
-    userID: DataTypes.INTEGER,
     maskRating: DataTypes.INTEGER,
     socialDistancingRating: DataTypes.INTEGER,
     sanitationRating: DataTypes.INTEGER,

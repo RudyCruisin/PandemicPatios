@@ -3,8 +3,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
    await queryInterface.bulkInsert('Reviews', [{
-    restaurantID: "1",
-    userID: "1",
     maskRating: "4",
     socialDistancingRating: "5",
     sanitationRating: "3",
@@ -18,8 +16,6 @@ module.exports = {
     createdAt: new Date(),
     updatedAt: new Date(),
      },{
-    restaurantID: "1",
-    userID: "1",
     maskRating: "5",
     socialDistancingRating: "5",
     sanitationRating: "5",
@@ -33,8 +29,6 @@ module.exports = {
     createdAt: new Date(),
     updatedAt: new Date(),
     },{
-    restaurantID: "2",
-    userID: "2",
     maskRating: "1",
     socialDistancingRating: "1",
     sanitationRating: "1",
