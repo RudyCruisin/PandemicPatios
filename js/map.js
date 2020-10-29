@@ -9,7 +9,7 @@ function initAutocomplete() {
     const input = document.getElementById("pac-input");
     // restrict to only cities in the US
     const options = {
-        types: ['(cities)'],
+        types: ['(regions)'],
         componentRestrictions: {country: 'us'}
       };
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
