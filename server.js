@@ -36,7 +36,7 @@ app.listen(process.env.PORT, () => {
 })
 
 
-// //Testing connection to database
+//Testing connection to database
 // const { Sequelize } = require('sequelize')
 // const sequelize = new Sequelize(`postgres://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:5432/${process.env.DB_NAME}`)
 // const db = require('./models')
@@ -45,3 +45,9 @@ app.listen(process.env.PORT, () => {
 //        console.log("Great Sucess!")
 //        db.sequelize.sync();
 //  })
+
+// -----------------------------------------------
+//             Review Routes
+// -----------------------------------------------
+const reviewRoutes = require('./router/reviewRoutes')
+app.use('/review', reviewRoutes)
