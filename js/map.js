@@ -23,13 +23,22 @@ function initAutocomplete() {
     const marker = new google.maps.Marker({
       map,
       anchorPoint: new google.maps.Point(0, -29),
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: '#343b3f',
+        fillOpacity: 0.6,
+        strokeColor: '#343b3f',
+        strokeOpacity: 0.9,
+        strokeWeight: 1,
+        scale: 5
+      }
     });
     const circle = new google.maps.Circle({
         strokeColor: "#FF0000",
         strokeOpacity: 0.8,
         strokeWeight: 2,
         fillColor: "#FF0000",
-        fillOpacity: 0.35,
+        fillOpacity: 0.15,
         map,
         center: { lat: 0, lng: 0},
         radius: 8046.72,
