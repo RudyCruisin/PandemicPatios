@@ -27,27 +27,24 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FB_ID,
     clientSecret: process.env.FB_SECRET,
     callbackURL: process.env.FB_CALLBACK,
-    profileFields: ['email', 'name']
+    // profileFields: ['email', 'name']
 },
-    function (accessToken, refreshToken, profile, done) {
-        const { email, first_name, last_name } = profile.json;
-        const userData = {
-            email,
-            firstName: first_name,
-            lastName: last_name
-        };
-        new userModel(userData).save();
-        done(null, profile)
+    function (accessToken, refreshToken, profile, cb) {
+        console.log(JSON.stringify(profile))
+        console.log("Access Token: "+ accessToken)
+        cb(null, profile)
     }
-))
-
-router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        failureRedirect: '/'
-    }),
-    (req, res) => { res.redirect('/') })
+));
 
 router.get('/auth/facebook',
     passport.authenticate('facebook'))
+
+router.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+
+    }),
+)
 
 module.exports = router
