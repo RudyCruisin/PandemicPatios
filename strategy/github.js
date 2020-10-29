@@ -41,12 +41,14 @@ passport.deserializeUser(function (id, done) {
     done(null, id);
 })
 
-router.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/' }),
+router.get('/auth/github/callback',
+    passport.authenticate('github', { failureRedirect: '/' }),
     (req, res) => {
         res.redirect('/')
     })
 
-router.get('/auth/github', passport.authenticate('github'))
+router.get('/auth/github',
+    passport.authenticate('github'))
 
 router.get('/logout', (req, res) => {
     req.logout()
