@@ -11,7 +11,9 @@ const app = express()
 // -----------------------------------------------
 const gh_auth = require('./strategy/github')
 const fb_auth = require('./strategy/facebook')
+const google_auth = require('./strategy/google')
 const twit_auth = require('./strategy/twitter')
+
 // const homeTest = require('./router/routerTest')
 
 // -----------------------------------------------
@@ -23,9 +25,11 @@ app.use(bodyParser.json())
 app.use('/', express.static(__dirname + '/public'))
 app.use('/css', express.static(__dirname + '/css'))
 app.use('/js', express.static(__dirname + '/js'))
+app.use('/form', express.static(__dirname + '/form'))
 
 app.use('/', gh_auth)
 app.use('/', fb_auth)
+app.use('/', google_auth)
 app.use('/', twit_auth)
 // app.use('/', homeTest)
 
