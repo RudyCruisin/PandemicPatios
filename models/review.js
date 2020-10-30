@@ -10,19 +10,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      models.Restaurant.hasMany(models.Review)
+      models.Review.belongsTo(models.Restaurant)
     }
   };
   Review.init({
-    restaurantID: DataTypes.INTEGER,
-    userID: DataTypes.INTEGER,
     maskRating: DataTypes.INTEGER,
     socialDistancingRating: DataTypes.INTEGER,
     sanitationRating: DataTypes.INTEGER,
     alcohol: DataTypes.STRING,
     foodRating: DataTypes.INTEGER,
     serviceRating: DataTypes.INTEGER,
-    atmosphere: DataTypes.STRING,
+    atmosphere: DataTypes.STRING, 
     patioSpaceRating: DataTypes.INTEGER,
     musicRating: DataTypes.INTEGER,
     petFriendly: DataTypes.STRING

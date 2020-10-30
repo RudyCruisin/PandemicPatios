@@ -2,24 +2,30 @@ require('dotenv').config()
 const bodyParser = require('body-parser')
 const express = require('express')
 const passport = require('passport')
-const FacebookStrategy = require('passport-facebook').Strategy
+const session = require('express-session')
+const TwitterStrategy = require('passport-twitter').Strategy
 
 const router = express.Router()
 
 router.use(bodyParser.json())
 
-router.get('/fbhome', (req, res) => {
+router.get('/twithome', (req, res) => {
     res.json({
-        location: "home in facebook strategy"
+        location: "home in twitter strategy"
     })
 })
 
-//Setting up Facebook Stategy with passport
+router.use(session({
+    secret: 'magicPatio'
+}))
 
-passport.use(new FacebookStrategy({
-    clientID: process.env.FB_ID,
-    clientSecret: process.env.FB_SECRET,
-    callbackURL: process.env.FB_CALLBACK,
+
+
+//Setting up Twitter Stategy with passport
+passport.use(new TwitterStrategy({
+    consumerKey: process.env.TWIT_ID,
+    consumerSecret: process.env.TWIT_SECRET,
+    callbackURL: process.env.TWIT_CALLBACK,
     // profileFields: ['email', 'name']
 },
     function (accessToken, refreshToken, profile, cb) {
@@ -40,11 +46,11 @@ passport.deserializeUser(function (obj, done) {
     done(null, obj);
 });
 
-router.get('/auth/facebook',
-    passport.authenticate('facebook'))
+router.get('/auth/twitter',
+    passport.authenticate('twitter'))
 
-router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/' }),
+router.get('/auth/twitter/callback',
+    passport.authenticate('twitter', { failureRedirect: '/' }),
     (req, res) => {
         res.redirect('/')
     })

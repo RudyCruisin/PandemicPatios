@@ -53,6 +53,7 @@ router.get('/auth/github',
 router.get('/logout', (req, res) => {
     req.logout()
     res.redirect('/')
+    console.log('You are logged out.')
 })
 
 module.exports = router
