@@ -25,6 +25,7 @@ app.use(bodyParser.json())
 app.use('/', express.static(__dirname + '/public'))
 app.use('/css', express.static(__dirname + '/css'))
 app.use('/js', express.static(__dirname + '/js'))
+app.use('/form', express.static(__dirname + '/form'))
 
 app.use('/', gh_auth)
 app.use('/', fb_auth)
