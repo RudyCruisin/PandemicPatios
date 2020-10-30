@@ -12,7 +12,7 @@ router.get('/restaurant/:resID', async (req, res)=> {
     const resID = req.params.resID;
     const resRev = await db.Review.findAll({
         where: {
-            restaurantID: resID
+            RestaurantId: resID
         }
     })
     res.send(resRev);
