@@ -8,12 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      restaurantID: {
-        type: Sequelize.INTEGER
-      },
-      userID:{
-        type: Sequelize.INTEGER
-      },
+      // restaurantID: {
+      //   allowNull: false,
+      //   foreignKey: true
+      // },
       maskRating: {
         type: Sequelize.INTEGER
       },
