@@ -1,226 +1,226 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
         <title>Review a Patio</title>
     </head>
     <body>
         <div>
             <h1>Review a Patio</h1>
         </div>
-        <div>
+        <div id="patioReview">
             <form>
-                <div class="form-group row">
-                  <label for="restaurantName" class="col-sm-2 col-form-label">Restaurant Name:</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="restaurantName">
-                  </div>
+                <div id="covidReview">
+                    
+                    <div id="maskRating">
+                        <p>Servers all properly wear masks.</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="maskRating" value="1">
+                            <label class="form-check-label" for="maskRating">1</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="maskRating" value="2">
+                            <label class="form-check-label" for="maskRating">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="maskRating" value="3">
+                            <label class="form-check-label" for="maskRating">3</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="maskRating" value="4">
+                            <label class="form-check-label" for="maskRating">4</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="maskRating" value="5">
+                            <label class="form-check-label" for="maskRating">5</label>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div id="socialDistancingRating">
+                        <p>Tables are spaced to allow at least 6 feet of social distancing.</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="socialDistancingRating" value="1">
+                            <label class="form-check-label" for="socialDistancingRating">1</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="socialDistancingRating" value="2">
+                            <label class="form-check-label" for="socialDistancingRating">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="socialDistancingRating" value="3">
+                            <label class="form-check-label" for="socialDistancingRating">3</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="socialDistancingRating" value="4">
+                            <label class="form-check-label" for="socialDistancingRating">4</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="socialDistancingRating" value="5">
+                            <label class="form-check-label" for="socialDistancingRating">5</label>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div id="sanitationRating">
+                        <p>Tables are sanitized between guests.</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sanitationRating" value="1">
+                            <label class="form-check-label" for="sanitationRating">1</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sanitationRating" value="2">
+                            <label class="form-check-label" for="sanitationRating">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sanitationRating" value="3">
+                            <label class="form-check-label" for="sanitationRating">3</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sanitationRating" value="4">
+                            <label class="form-check-label" for="sanitationRating">4</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sanitationRating" value="5">
+                            <label class="form-check-label" for="sanitationRating">5</label>
+                        </div>
+                    </div>
+
                 </div>
-                
-                <fieldset class="form-group">
-                  <div class="row">
-                    <legend class="col-form-label col-sm-2 pt-0">Is the patio covered?</legend>
-                    <div class="col-sm-10">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                          Covered
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                        <label class="form-check-label" for="gridRadios2">
-                          Partially covered
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-                        <label class="form-check-label" for="gridRadios3">
-                          Uncovered
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
+                <br/>
 
-                <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-label col-sm-2 pt-0">Are there heaters?</legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                          <label class="form-check-label" for="gridRadios1">
-                            Yes
-                          </label>
+                <div id="restaurantReview">
+                    
+                    <div id="alcohol">
+                        <p>The restaurant has a full bar.</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="alcohol" value="yes">
+                            <label class="form-check-label" for="alcohol">Yes</label>
                         </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                          <label class="form-check-label" for="gridRadios2">
-                            No
-                          </label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="alcohol" value="no">
+                            <label class="form-check-label" for="alcohol">No</label>
                         </div>
                     </div>
-                </fieldset>
+                    <br/>
 
-                <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-label col-sm-2 pt-0">Is there a fireplace and/or firepit?</legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                          <label class="form-check-label" for="gridRadios1">
-                            Yes
-                          </label>
+                    <div id="foodRating">
+                        <p>Rate the food.</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="foodRating" value="1">
+                            <label class="form-check-label" for="foodRating">1</label>
                         </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                          <label class="form-check-label" for="gridRadios2">
-                            No
-                          </label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="foodRating" value="2">
+                            <label class="form-check-label" for="foodRating">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="foodRating" value="3">
+                            <label class="form-check-label" for="foodRating">3</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="foodRating" value="4">
+                            <label class="form-check-label" for="foodRating">4</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="foodRating" value="5">
+                            <label class="form-check-label" for="foodRating">5</label>
                         </div>
                     </div>
-                </fieldset>
+                    <br/>
 
-                <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-label col-sm-2 pt-0">Is there a full bar?</legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                          <label class="form-check-label" for="gridRadios1">
-                            Yes
-                          </label>
+                    <div id="serviceRating">
+                        <p>Rate the service.</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="serviceRating" value="1">
+                            <label class="form-check-label" for="serviceRating">1</label>
                         </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                          <label class="form-check-label" for="gridRadios2">
-                            No
-                          </label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="serviceRating" value="2">
+                            <label class="form-check-label" for="serviceRating">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="serviceRating" value="3">
+                            <label class="form-check-label" for="serviceRating">3</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="serviceRating" value="4">
+                            <label class="form-check-label" for="serviceRating">4</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="serviceRating" value="5">
+                            <label class="form-check-label" for="serviceRating">5</label>
                         </div>
                     </div>
-                </fieldset>
 
-                <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-label col-sm-2 pt-0">Is it pet friendly?</legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                          <label class="form-check-label" for="gridRadios1">
-                            Yes
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                          <label class="form-check-label" for="gridRadios2">
-                            No
-                          </label>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-label col-sm-2 pt-0">Are the servers masked?</legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                          <label class="form-check-label" for="gridRadios1">
-                            Yes
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                          <label class="form-check-label" for="gridRadios2">
-                            No
-                          </label>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-label col-sm-2 pt-0">Is the seating properly spaced?</legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                          <label class="form-check-label" for="gridRadios1">
-                            Yes
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                          <label class="form-check-label" for="gridRadios2">
-                            No
-                          </label>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-label col-sm-2 pt-0">Is there live music?</legend>
-                      <div class="col-sm-10">
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                          <label class="form-check-label" for="gridRadios1">
-                            Yes
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                          <label class="form-check-label" for="gridRadios2">
-                            No
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-                          <label class="form-check-label" for="gridRadios3">
-                            Sometimes
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">How would you rate the food?</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">How would you rate the service?</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="exampleFormControlSelect1">What is your overall rating of this patio?</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                    </select>
-                  </div>
-
-                <div class="form-group row">
-                  <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </div>
                 </div>
-              </form>
+                <br/>
+
+                <div id="patioReview">
+                    
+                    <div id="atmosphere">
+                        <p>Are any of these amenities available at the patio? (Choose all that apply.)</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="atmosphere" value="firepit">
+                            <label class="form-check-label" for="atmosphere">Firepit</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="atmosphere" value="heaters">
+                            <label class="form-check-label" for="atmosphere">Heaters</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="atmosphere" value="live-music">
+                            <label class="form-check-label" for="atmosphere">Live Music</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" name="atmosphere" value="covered">
+                            <label class="form-check-label" for="atmosphere">Covered seating</label>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div id="petFriendly">
+                        <p>Pets are welcome.</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="petFriendly" value="yes">
+                            <label class="form-check-label" for="petFriendly">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="petFriendly" value="no">
+                            <label class="form-check-label" for="petFriendly">No</label>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <div id="patioSpaceRating">
+                        <p>Rate the patio overall.</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="patioSpaceRating" value="1">
+                            <label class="form-check-label" for="patioSpaceRating">1</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="patioSpaceRating" value="2">
+                            <label class="form-check-label" for="patioSpaceRating">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="patioSpaceRating" value="3">
+                            <label class="form-check-label" for="patioSpaceRating">3</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="patioSpaceRating" value="4">
+                            <label class="form-check-label" for="patioSpaceRating">4</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="patioSpaceRating" value="5">
+                            <label class="form-check-label" for="patioSpaceRating">5</label>
+                        </div>
+                    </div>
+
+                </div>
+                <br/>
+
+                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </form>
         </div>
     </body>
 </html>
