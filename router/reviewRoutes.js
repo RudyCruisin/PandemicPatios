@@ -18,15 +18,15 @@ router.get('/restaurant/:resID', async (req, res)=> {
     res.send(resRev);
 })
 //Sends every review made by a specific user
-router.get('/user/:userID', async (req, res)=> {
-    const userID = req.params.userID;
-    const userRev = await db.Review.findAll({
-        where: {
-            userID: userID
-        }
-    })
-    res.send(userRev);
-})
+// router.get('/user/:userID', async (req, res)=> {
+//     const userID = req.params.userID;
+//     const userRev = await db.Review.findAll({
+//         where: {
+//             userID: userID
+//         }
+//     })
+//     res.send(userRev);
+// })
 //Deletes a review
 router.delete('/:id', async (req, res)=> {
     const id = req.params.id;
