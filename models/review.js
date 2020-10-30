@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     serviceRating: DataTypes.INTEGER,
     atmosphere: DataTypes.STRING, 
     patioSpaceRating: DataTypes.INTEGER,
-    musicRating: DataTypes.INTEGER,
     petFriendly: DataTypes.STRING
   }, {
     sequelize,

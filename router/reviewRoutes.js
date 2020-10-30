@@ -38,4 +38,22 @@ router.delete('/:id', async (req, res)=> {
     res.send(deletedReview)
 })
 
+router.post('/add', async (req, res)=> {
+    const { maskR, socialR, sanR, alc, foodR, serviceR, atmos, patioR, pet } = req.body
+
+    const newReview = await db.Review.create({
+        maskRating: maskR,
+        socialDistancingRating: socialR,
+        sanitationRating: sanR,
+        alcohol: alc,
+        foodRating: foodR,
+        serviceRating: serviceR,
+        atmostphere: atmos,
+        patioSpaceRating: patioR,
+        petFriendly: pet
+    })
+
+    res.send(newReview)
+})
+
 module.exports = router
