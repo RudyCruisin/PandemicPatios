@@ -15,13 +15,6 @@ router.get('/fbhome', (req, res) => {
 })
 
 //Setting up Facebook Stategy with passport
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (obj, done) {
-    done(null, obj);
-});
 
 passport.use(new FacebookStrategy({
     clientID: process.env.FB_ID,
@@ -36,15 +29,24 @@ passport.use(new FacebookStrategy({
     }
 ));
 
+router.use(passport.initialize())
+router.use(passport.session())
+
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function (obj, done) {
+    done(null, obj);
+});
+
 router.get('/auth/facebook',
     passport.authenticate('facebook'))
 
 router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-
-    }),
-)
+    passport.authenticate('facebook', { failureRedirect: '/' }),
+    (req, res) => {
+        res.redirect('/')
+    })
 
 module.exports = router
