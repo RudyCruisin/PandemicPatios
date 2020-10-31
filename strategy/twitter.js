@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const passport = require('passport')
 const session = require('express-session')
+const db = require('../models')
 const TwitterStrategy = require('passport-twitter').Strategy
 
 const router = express.Router()
@@ -28,9 +29,24 @@ passport.use(new TwitterStrategy({
     callbackURL: process.env.TWIT_CALLBACK,
     // profileFields: ['email', 'name']
 },
-    function (accessToken, refreshToken, profile, cb) {
-        console.log((profile))
+    async function (accessToken, refreshToken, profile, cb) {
+        console.log(profile)
+        console.log(profile.username)
         console.log("Access Token: "+ accessToken)
+
+        let user = await db.User.findOne({ where: { TWIT_ID: (profile.id) }})
+
+        if (!user) {
+            user = await db.User.build({
+                TWIT_ID: profile.id,
+                username: profile.username,
+                createAt: new Date(),
+                updatedAt: new Date(),
+                email: profile.email,
+            })
+            await user.save();
+        }
+
         cb(null, profile)
     }
 ));

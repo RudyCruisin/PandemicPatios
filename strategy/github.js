@@ -2,6 +2,7 @@ require('dotenv').config()
 const bodyParser = require('body-parser')
 const express = require('express')
 const passport = require('passport')
+const db = require('../models')
 const GitHubStrategy = require('passport-github').Strategy
 
 const router = express.Router()
@@ -21,10 +22,22 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.GH_SECRET,
     callbackURL: process.env.GH_CALLBACK
 },
-    function (accessToken, refreshToken, profile, cb) {
+    async function (accessToken, refreshToken, profile, cb) {
         console.log((profile))
-
         console.log("Access Token: " + accessToken)
+
+        let user = await db.User.findOne({ where: { GH_ID: (profile.id) }})
+
+        if (!user) {
+            user = await db.User.build({
+                GH_ID: (profile.id),
+                username: profile.username,
+                createAt: new Date(),
+                updatedAt: new Date(),
+                email: profile.email,
+            })
+            await user.save();
+        }
 
         cb(null, profile)
     }
