@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.Restaurant.hasMany(models.Review)
       models.Review.belongsTo(models.Restaurant)
+
+      models.User.hasMany(models.Review)
+      models.Review.belongsTo(models.User)
     }
   };
   Review.init({
