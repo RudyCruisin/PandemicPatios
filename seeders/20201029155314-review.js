@@ -11,10 +11,10 @@ module.exports = {
     serviceRating: "4",
     atmosphere: "Quiet",
     patioSpaceRating: "2",
-    musicRating: "3",
     petFriendly: "NO",
     createdAt: new Date(),
     updatedAt: new Date(),
+    RestaurantId: "1"
      },{
     maskRating: "5",
     socialDistancingRating: "5",
@@ -24,10 +24,10 @@ module.exports = {
     serviceRating: "5",
     atmosphere: "Loud",
     patioSpaceRating: "5",
-    musicRating: "5",
     petFriendly: "YES",
     createdAt: new Date(),
     updatedAt: new Date(),
+    RestaurantId: "1"
     },{
     maskRating: "1",
     socialDistancingRating: "1",
@@ -37,10 +37,10 @@ module.exports = {
     serviceRating: "1",
     atmosphere: "Dull",
     patioSpaceRating: "1",
-    musicRating: "1",
     petFriendly: "NO",
     createdAt: new Date(),
     updatedAt: new Date(),
+    RestaurantId: "1"
     }
     ], {});
   },

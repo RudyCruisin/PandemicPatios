@@ -8,10 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // restaurantID: {
-      //   allowNull: false,
-      //   foreignKey: true
-      // },
       maskRating: {
         type: Sequelize.INTEGER
       },
@@ -34,9 +30,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       patioSpaceRating: {
-        type: Sequelize.INTEGER
-      },
-      musicRating: {
         type: Sequelize.INTEGER
       },
       petFriendly: {
