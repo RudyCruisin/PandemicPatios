@@ -6,7 +6,7 @@ module.exports = {
     name: 'TestSite',
     address: 'TestAddress',
     city: 'TestCity',
-    state: 'TestCity',
+    state: 'TestState',
     zipCode: '000001',
     phoneNumber: '1234567890',
     createdAt: new Date(),
