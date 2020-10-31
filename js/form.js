@@ -11,6 +11,8 @@ const handleSubmit = e => {
     const data = new FormData(e.target);
     const stringified = stringifyFormData(data)
     sendReview(stringified)
+//  should redirect to new page
+//  window.location.replace('');
 }
 
 //$("#form").on("submit", handleSubmit())
