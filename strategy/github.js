@@ -22,7 +22,7 @@ passport.use(new GitHubStrategy({
     callbackURL: process.env.GH_CALLBACK
 },
     function (accessToken, refreshToken, profile, cb) {
-        console.log(JSON.stringify(profile))
+        console.log((profile))
 
         console.log("Access Token: " + accessToken)
 

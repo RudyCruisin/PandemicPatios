@@ -23,7 +23,7 @@ passport.use(new FacebookStrategy({
     // profileFields: ['email', 'name']
 },
     function (accessToken, refreshToken, profile, cb) {
-        console.log(JSON.stringify(profile))
+        console.log((profile))
         console.log("Access Token: "+ accessToken)
         cb(null, profile)
     }

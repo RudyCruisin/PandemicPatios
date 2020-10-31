@@ -11,7 +11,7 @@ passport.use(new GoogleStrategy({
     passReqToCallback: true
   },
   function(request, accessToken, refreshToken, profile, done) {
-    console.log(JSON.stringify(profile));
+    console.log((profile));
     console.log("Access Token: " + accessToken);
     done(null, profile);
   }
