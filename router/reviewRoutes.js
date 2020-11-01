@@ -52,7 +52,7 @@ router.post('/add', async (req, res)=> {
         patioSpaceRating,
         petFriendly
     })
-
+    console.log(newReview)
     res.send(newReview)
 })
 
