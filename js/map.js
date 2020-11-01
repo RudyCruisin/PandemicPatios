@@ -60,7 +60,7 @@ function renderMarkers(restaurantMarkers, map) {
 
         // CREATES A POPUP FOR THE MARKER
         let infowindow = new google.maps.InfoWindow({
-            content: `POPUP GOES HERE`
+            content: `<a href="../form">Review this Patio</a>`
         });
 
         // ADDS CLICK EVENT LISTENER TO MARKER
