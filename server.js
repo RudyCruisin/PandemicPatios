@@ -51,6 +51,7 @@ app.listen(process.env.PORT, () => {
 //        console.log("Great Success!")
 //        db.sequelize.sync()
 //        db.Review.sync({ alter: true })
+//        db.User.sync({ alter: true })
 //  })
 
 // -----------------------------------------------
