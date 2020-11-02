@@ -55,4 +55,17 @@ router.post('/add', async (req, res)=> {
     res.send(newReview)
 })
 
+router.patch('/update/:id', async (req, res)=> {
+    const { id } = req.params;
+
+    const updateReview = await db.Review.update(req.body, {
+        where: {
+            id
+        }
+    })
+
+    res.send(updateReview)
+})
+
+
 module.exports = router
