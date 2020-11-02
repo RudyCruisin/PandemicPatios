@@ -2,6 +2,7 @@ require('dotenv').config()
 const bodyParser = require('body-parser')
 const express = require('express')
 const passport = require('passport')
+const db = require('../models')
 const FacebookStrategy = require('passport-facebook').Strategy
 
 const router = express.Router()
@@ -22,9 +23,22 @@ passport.use(new FacebookStrategy({
     callbackURL: process.env.FB_CALLBACK,
     // profileFields: ['email', 'name']
 },
-    function (accessToken, refreshToken, profile, cb) {
-        console.log(JSON.stringify(profile))
+    async function (accessToken, refreshToken, profile, cb) {
+        console.log((profile))
         console.log("Access Token: "+ accessToken)
+        let user = await db.User.findOne({ where: { FB_ID: (profile.id) }})
+
+        if (!user) {
+            user = await db.User.build({
+                FB_ID: (profile.id),
+                username: profile.displayName,
+                createAt: new Date(),
+                updatedAt: new Date(),
+                email: profile.email
+            })
+            await user.save();
+        }
+
         cb(null, profile)
     }
 ));

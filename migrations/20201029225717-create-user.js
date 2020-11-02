@@ -21,6 +21,22 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      GH_ID: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      FB_ID: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      TWIT_ID: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      GOOG_ID: {
+        allowNull: true,
+        type: Sequelize.STRING
       }
     });
   },
