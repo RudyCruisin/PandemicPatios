@@ -26,6 +26,7 @@ app.use('/', express.static(__dirname + '/public'))
 app.use('/css', express.static(__dirname + '/css'))
 app.use('/js', express.static(__dirname + '/js'))
 app.use('/form', express.static(__dirname + '/form'))
+app.use('/businessform', express.static(__dirname + '/businessform'))
 
 app.use('/', gh_auth)
 app.use('/', fb_auth)
@@ -53,7 +54,10 @@ app.listen(process.env.PORT, () => {
 //  })
 
 // -----------------------------------------------
-//             Review Routes
+//             Database Routes
 // -----------------------------------------------
 const reviewRoutes = require('./router/reviewRoutes')
+const restRoutes = require('./router/restaurantRoutes')
+
 app.use('/review', reviewRoutes)
+app.use('/business', restRoutes)
