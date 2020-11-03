@@ -2,7 +2,7 @@ html,
 body {
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 15px;
 }
 
 #locationField,
@@ -15,6 +15,7 @@ body {
   position: absolute;
   top: 0px;
   left: 0px;
+  margin: 1em;
   width: 99%;
 }
 
@@ -27,8 +28,7 @@ body {
 }
 
 #address {
-  border: 1px solid #000090;
-  background-color: #f0f9ff;
+  margin: 1em;
   width: 480px;
   padding-right: 2px;
 }

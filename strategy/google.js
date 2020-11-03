@@ -2,6 +2,7 @@ require('dotenv').config()
 const bodyParser = require('body-parser')
 const express = require('express')
 const passport = require('passport')
+const db = require('../models')
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 passport.use(new GoogleStrategy({
@@ -10,9 +11,23 @@ passport.use(new GoogleStrategy({
     callbackURL: process.env.GOOGLE_CALLBACK,
     passReqToCallback: true
   },
-  function(request, accessToken, refreshToken, profile, done) {
-    console.log(JSON.stringify(profile));
+  async function(request, accessToken, refreshToken, profile, done) {
+    console.log((profile));
     console.log("Access Token: " + accessToken);
+
+    let user = await db.User.findOne({ where: { GOOG_ID: (profile.id) }})
+
+    if (!user) {
+        user = await db.User.build({
+          GOOG_ID: profile.id,
+            username: profile.displayName,
+            createAt: new Date(),
+            updatedAt: new Date(),
+            email: profile.email,
+        })
+        await user.save();
+    }
+
     done(null, profile);
   }
 ));
