@@ -46,17 +46,20 @@ async function geocodeRestaurants(locationsToGeocode) {
     return await Promise.all(locationPromises);
 }
 
+// NEED A GLOBAL ARRAY OF ALL MARKERS SO CAN CLEAR MAP BEFORE EACH AUTOCOMPLETE RESULT
+let restaurantMarkers = [];
+
 // RENDER FUNCTION FOR RESTAURANT MARKERS
-function renderMarkers(restaurantMarkers, map) {
-    console.log(restaurantMarkers);
-    restaurantMarkers.forEach((currentRestaurant) => {
-        console.log(currentRestaurant);
+function renderMarkers(restaurants, map) {
+    restaurants.forEach((currentRestaurant) => {
 
         // CREATES A MARKER
         let marker = new google.maps.Marker({
             position: currentRestaurant.results[0].geometry.location,
             map: map,
         });
+        
+        restaurantMarkers.push(marker);
 
         // CREATES A POPUP FOR THE MARKER
         let infowindow = new google.maps.InfoWindow({
@@ -68,6 +71,36 @@ function renderMarkers(restaurantMarkers, map) {
             infowindow.open(map, marker);
         });
     });
+}
+
+// A HELPER FUNCTION TO GET RID OF MARKERS AT THE BEGINNING OF renderMarkersInBoundary()
+function setMapOnAll(map) {
+    for (let i = 0; i < restaurantMarkers.length; i++) {
+      restaurantMarkers[i].setMap(map);
+    }
+}
+// RENDER FUNCTION FOR ONLY MARKERS IN BOUNDARY CIRCLE
+function renderMarkersInBoundary(restaurants, boundaryCir, map) {
+    
+    // CLEAR ALL MARKERS
+    setMapOnAll(null);
+
+    // A NEW ARRAY FOR ONLY THE MARKERS WITHIN THE BOUNDARY
+    let restaurantsInBoundary = [];
+
+    // GETS LAT/LONGS OF CURRENT RESTAURANT & BOUNDARY CENTER & THEN USES GEOMETRY LIBRARY TO FIND THE DISTANCE BETWEEN
+    restaurants.forEach((currentRestaurant) => {
+        let marker_lat_lng = new google.maps.LatLng(currentRestaurant.results[0].geometry.location.lat, currentRestaurant.results[0].geometry.location.lng);
+        let boundaryCirCenter = new google.maps.LatLng(boundaryCir.center.lat(), boundaryCir.center.lng());
+        let distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(boundaryCirCenter, marker_lat_lng);
+        
+        // CHECK TO SEE IF MARKER IS WITHIN BOUNDARY CIRCLE
+        if (distance_from_location <= boundaryCir.radius) {
+            restaurantsInBoundary.push(currentRestaurant);
+        }
+    })
+    // RE-RENDER MARKERS BUT ONLY THE ONES IN THE GIVEN BOUNDARY
+    renderMarkers(restaurantsInBoundary, map)
 }
 
 // THIS IS THE GOOGLE MAPS CALLBACK FUNCTION IN THE SCRIPT TAG
@@ -116,10 +149,10 @@ async function runApp() {
     });
 
     // TURNS ADDRESSES INTO LAT LONG FOR EACH RESTAURANT
-    const restaurantMarkers = await geocodeRestaurants(locations);
+    const geocodedRestaurants = await geocodeRestaurants(locations);
 
-    // RENDERS RESTAURANT MARKERS ON MAP
-    renderMarkers(restaurantMarkers, map);
+    // RENDERS ALL RESTAURANT MARKERS ON MAP WHEN MAP LOADS
+    renderMarkers(geocodedRestaurants, map);
 
     // ADD EVENT LISTENER TO AUTOCOMPLETE SEARCH
     autocomplete.addListener("place_changed", () => {
@@ -145,6 +178,12 @@ async function runApp() {
       locationMarker.setVisible(true);
       boundaryCircle.setCenter(place.geometry.location);
       boundaryCircle.setVisible(true);
+
+      // ADD RESTAURANT MARKERS HERE -- ONLY WITHIN BOUNDARY CIRCLE
+      renderMarkersInBoundary(geocodedRestaurants, boundaryCircle, map)
+
+      // ALLOW FOR USER TO DESELECT BOUNDARY AND SEE ALL RESTAURANTS NEARBY -- THINK ZILLOW
+      // TBD
 
       // LINK UP WEATHER DATA
       getWeather(place);
