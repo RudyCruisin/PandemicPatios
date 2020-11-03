@@ -178,12 +178,23 @@ async function runApp() {
       locationMarker.setVisible(true);
       boundaryCircle.setCenter(place.geometry.location);
       boundaryCircle.setVisible(true);
+      let boundaryCheckbox = document.getElementById ("remove-boundary-btn");
+      boundaryCheckbox.checked = false;
+
 
       // ADD RESTAURANT MARKERS HERE -- ONLY WITHIN BOUNDARY CIRCLE
       renderMarkersInBoundary(geocodedRestaurants, boundaryCircle, map)
 
-      // ALLOW FOR USER TO DESELECT BOUNDARY AND SEE ALL RESTAURANTS NEARBY -- THINK ZILLOW
-      // TBD
+      // ALLOW FOR USER TO DESELECT BOUNDARY AND SEE ALL RESTAURANTS NEARBY. ALSO ALLOWS USER TO RESELECT GIVEN BOUNDARY
+      boundaryCheckbox.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            renderMarkers(geocodedRestaurants, map);
+            boundaryCircle.setVisible(false);
+        } else {
+            renderMarkersInBoundary(geocodedRestaurants, boundaryCircle, map);
+            boundaryCircle.setVisible(true);
+        }
+      });
 
       // LINK UP WEATHER DATA
       getWeather(place);
