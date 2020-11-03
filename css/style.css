@@ -47,6 +47,16 @@ text-overflow: ellipsis;
 width: 250px;
 }
 
+#remove-boundary-btn {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    margin-top: 10px;
+    padding: 0 11px 0 13px;
+    }
+
 #pac-input:focus {
 border-color: #343b3f;
 }
