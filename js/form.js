@@ -10,7 +10,8 @@ const handleSubmit = e => {
     e.preventDefault();
     const data = new FormData(e.target);
     const stringified = stringifyFormData(data)
-    sendReview(stringified)
+    //sendReview(stringified)
+    window.location.assign("/")
 }
 
 //$("#form").on("submit", handleSubmit())
