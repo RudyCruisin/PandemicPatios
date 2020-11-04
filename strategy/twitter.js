@@ -17,7 +17,8 @@ router.get('/twithome', (req, res) => {
 })
 
 router.use(session({
-    secret: 'magicPatio'
+    secret: 'magicPatio',
+    maxAge: (24*60*1000*60)
 }))
 
 
@@ -30,10 +31,10 @@ passport.use(new TwitterStrategy({
     // profileFields: ['email', 'name']
 },
     async function (accessToken, refreshToken, profile, cb) {
-        console.log(profile)
-        console.log(profile.username)
-        console.log("Access Token: "+ accessToken)
-
+        //console.log(profile)
+        //console.log(profile.username)
+        //console.log("Access Token: "+ accessToken)
+        console.log("Twitter Login Successful")
         let user = await db.User.findOne({ where: { TWIT_ID: (profile.id) }})
 
         if (!user) {

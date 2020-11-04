@@ -12,9 +12,8 @@ passport.use(new GoogleStrategy({
     passReqToCallback: true
   },
   async function(request, accessToken, refreshToken, profile, done) {
-    console.log((profile));
+    //console.log((profile));
     console.log("Access Token: " + accessToken);
-
     let user = await db.User.findOne({ where: { GOOG_ID: (profile.id) }})
 
     if (!user) {

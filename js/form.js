@@ -11,6 +11,7 @@ const handleSubmit = e => {
     const data = new FormData(e.target);
     const stringified = stringifyFormData(data)
     sendReview(stringified)
+    window.location.assign("/")
 }
 
 //$("#form").on("submit", handleSubmit())
