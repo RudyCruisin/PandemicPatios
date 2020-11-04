@@ -58,6 +58,8 @@ app.listen(process.env.PORT, () => {
 // -----------------------------------------------
 const reviewRoutes = require('./router/reviewRoutes')
 const restRoutes = require('./router/restaurantRoutes')
+const userRoutes = require('./router/userRoutes')
 
 app.use('/review', reviewRoutes)
 app.use('/business', restRoutes)
+app.use('/user', userRoutes)
