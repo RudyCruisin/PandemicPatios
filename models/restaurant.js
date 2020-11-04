@@ -20,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     state: DataTypes.STRING,
     zipCode: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
+    lat: DataTypes.FLOAT,
+    lng: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'Restaurant',
