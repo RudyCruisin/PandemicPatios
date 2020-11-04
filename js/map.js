@@ -31,10 +31,12 @@ function initAutocomplete(map) {
 // GET RESTAURANTS FROM DB
 async function getRestaurants() {
     console.log("hello world")
-    await fetch('/restaurant/getAll')
+    fetch('/restaurant/getAll')
     .then(response => response.json())
-    .then(data => console.log("you are in the getRestaurants()", data.location))
+    .then(data => console.log("you are in the getRestaurants()", data))
 }
+
+getRestaurants();
 
 // GEOCODING API -- TURNING RESTAURANT ADDRESSES INTO LAT/LONG COORDINATES
 const googleMapsAPIKey = 'AIzaSyDylyELTw5HP6i0KIEp7jyIWTva_SdH2IQ';

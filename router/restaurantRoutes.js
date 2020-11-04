@@ -4,7 +4,7 @@ const db = require('../models');
 const { route } = require('../strategy/google');
 
 
-//Adds a business to the Restaurant table with fields from request body
+//Adds a restaurant to the Restaurant table with fields from request body
 router.post('/add', async (req, res)=> {
     const { name, street_number, route, locality, administrative_area_level_1, postal_code, phoneNumber, lat, lng } = req.body
     console.log(req.body);
@@ -23,13 +23,13 @@ router.post('/add', async (req, res)=> {
     res.send(newRestaurant)
 })
 
-//gets all business from DB
+//gets all restaurants from DB
 router.get('/getAll', async (req, res) => {
-    const restaurants = await Restaurant.findAll();
+    const restaurants = await db.Restaurant.findAll();
     res.json(restaurants);
   });
 
-//deletes business from DB 
+//deletes restaurant from DB 
 router.delete('/remove/:id', async (req, res)=> {
     const id = req.params.id
 
