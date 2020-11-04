@@ -5,7 +5,6 @@ const componentForm = {
   route: "long_name",
   locality: "long_name",
   administrative_area_level_1: "short_name",
-  country: "long_name",
   postal_code: "short_name",
 };
 
@@ -27,6 +26,7 @@ function initAutocomplete() {
 function fillInAddress() {
   // Get the place details from the autocomplete object.
   const place = autocomplete.getPlace();
+  console.log("this is the place", place);
 
   for (const component in componentForm) {
     document.getElementById(component).value = "";
@@ -45,20 +45,37 @@ function fillInAddress() {
   }
 }
 
-// Bias the autocomplete object to the user's geographical location,
-// as supplied by the browser's 'navigator.geolocation' object.
-function geolocate() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const geolocation = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-      const circle = new google.maps.Circle({
-        center: geolocation,
-        radius: position.coords.accuracy,
-      });
-      autocomplete.setBounds(circle.getBounds());
-    });
+// EVENT LISTENER ON SUBMIT
+const stringifyFormData = fd => {
+  const data = {}
+  for(let field of fd.keys()){
+      data[field] = fd.get(field)
   }
+  return JSON.stringify(data, null, 2)
+}
+
+const handleSubmit = e => {
+  e.preventDefault();
+  const stAdd = document.getElementById('street_number').value;
+  const data = new FormData(e.target);
+  const stringified = stringifyFormData(data)
+  sendBusiness(stringified);
+}
+
+const form = document.getElementById('businessForm')
+form.addEventListener('submit', handleSubmit);
+
+const sendBusiness = async (restaurantAddress)=> {
+  console.log(restaurantAddress)
+  await fetch ('/business/add', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      body: restaurantAddress
+      })
 }
