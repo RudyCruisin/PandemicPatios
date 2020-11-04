@@ -23,6 +23,11 @@ router.post('/add', async (req, res)=> {
     res.send(newRestaurant)
 })
 
+//gets all business from DB
+router.get('/getAll', async (req, res) => {
+    const restaurants = await Restaurant.findAll();
+    res.json(restaurants);
+  });
 
 //deletes business from DB 
 router.delete('/remove/:id', async (req, res)=> {
@@ -34,7 +39,7 @@ router.delete('/remove/:id', async (req, res)=> {
         }
     })
     //add functionality that removes associated reviews 
-    res.send('Business Removed')
+    res.send('Restaurant Removed')
 
 })
 module.exports = router

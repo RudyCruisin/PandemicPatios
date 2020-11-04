@@ -84,7 +84,7 @@ form.addEventListener('submit', handleSubmit);
 
 const sendBusiness = async (restaurantAddress)=> {
   console.log(restaurantAddress)
-  await fetch ('/business/add', {
+  await fetch ('/restaurant/add', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
