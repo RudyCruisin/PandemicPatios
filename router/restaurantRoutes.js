@@ -1,18 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+const { route } = require('../strategy/google');
 
 
 //Adds a business to the Restaurant table with fields from request body
 router.post('/add', async (req, res)=> {
-    const { name, address, city, state, zipCode, phoneNumber } = req.body
-
+    const { name, street_number, route, locality, administrative_area_level_1, postal_code, phoneNumber } = req.body
+    console.log(req.body);
     const newRestaurant = await db.Restaurant.create({
         name,
-        address,
-        city,
-        state,
-        zipCode,
+        streetNumber: street_number,
+        streetName: route,
+        city: locality,
+        state: administrative_area_level_1,
+        zipCode: postal_code,
         phoneNumber
     })
 

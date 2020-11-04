@@ -14,11 +14,12 @@ module.exports = (sequelize, DataTypes) => {
   };
   Restaurant.init({
     name: DataTypes.STRING,
-    address: DataTypes.STRING,
+    streetNumber: DataTypes.STRING,
+    streetName: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
-    zipCode: DataTypes.INTEGER,
-    phoneNumber: DataTypes.INTEGER,
+    zipCode: DataTypes.STRING,
+    phoneNumber: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Restaurant',
