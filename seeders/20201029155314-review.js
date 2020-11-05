@@ -14,7 +14,8 @@ module.exports = {
     petFriendly: "NO",
     createdAt: new Date(),
     updatedAt: new Date(),
-    RestaurantId: "3"
+    RestaurantId: "3",
+    UserId: "1"
      },{
     maskRating: "5",
     socialDistancingRating: "5",
@@ -27,7 +28,8 @@ module.exports = {
     petFriendly: "YES",
     createdAt: new Date(),
     updatedAt: new Date(),
-    RestaurantId: "3"
+    RestaurantId: "3",
+    UserId: "1"
     },{
     maskRating: "1",
     socialDistancingRating: "1",
@@ -40,7 +42,8 @@ module.exports = {
     petFriendly: "NO",
     createdAt: new Date(),
     updatedAt: new Date(),
-    RestaurantId: "3"
+    RestaurantId: "3",
+    UserId: "1"
     }
     ], {});
   },

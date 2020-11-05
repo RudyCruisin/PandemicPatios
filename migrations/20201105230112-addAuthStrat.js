@@ -2,12 +2,11 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.changeColumn(
+    await queryInterface.addColumn(
       'Users',
-      'authId',
+      'authStrat',
       {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.INTEGER
       }
     )
   },
