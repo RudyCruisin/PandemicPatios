@@ -33,7 +33,10 @@ async function getRestaurants() {
     console.log("hello world")
     fetch('/restaurant/getAll')
     .then(response => response.json())
-    .then(data => console.log("you are in the getRestaurants()", data))
+    .then((data) => {
+        console.log("you are in the getRestaurants()", data)
+        return data
+    })
 }
 
 getRestaurants();
