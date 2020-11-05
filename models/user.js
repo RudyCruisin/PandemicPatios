@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      models.oAuths.hasMany(models.User)
+      models.User.belongsTo(models.oAuths)
     }
   };
   User.init({
@@ -20,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     FB_ID: DataTypes.STRING,
     TWIT_ID: DataTypes.STRING,
     GOOG_ID: DataTypes.STRING,
+    // auth_ID: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'User',
