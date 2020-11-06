@@ -55,10 +55,26 @@ router.delete('/:id', async (req, res)=> {
 })
 
 router.post('/add', loggedIn,  async (req, res)=> {
+    console.log(req.user.provider)
     //gets logged in user's authID
     const UserId = req.user.id
     //passes UserId to getAuthID in order to return Id of that user
-    const authId = await getAuthID(UserId)
+    var strat;
+
+    if (req.user.provider == "twitter") {
+        strat = 1
+    }
+    else if (req.user.provider == "facebook") {
+        strat = 2
+    }
+    else if (req.user.provider == "google") {
+        strat = 3
+    }
+    else if (req.user.provider == "github") {
+        strat = 4
+    }
+
+    const authId = await getAuthID(UserId, strat)
     console.log(authId)
     const { maskRating, socialDistancingRating, sanitationRating, alcohol, foodRating, serviceRating, atmosphere, patioSpaceRating, petFriendly, RestaurantId } = req.body
 

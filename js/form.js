@@ -10,9 +10,13 @@ const handleSubmit = e => {
     e.preventDefault();
     let restaurantId = localStorage.getItem("restaurantId");
     const data = new FormData(e.target);
+    console.log(data)
+    data.append('RestaurantId', restaurantId);
     const stringified = stringifyFormData(data)
     sendReview(stringified)
     window.location.assign("/")
+    console.log(stringified)
+
 }
 
 //$("#form").on("submit", handleSubmit())
@@ -22,7 +26,6 @@ form.addEventListener('submit', handleSubmit)
 
 
 const sendReview = async (review, RestaurantId)=> {
-    console.log(review)
     await fetch ('/review/add', {
         method: 'POST',
         headers: {
@@ -32,6 +35,6 @@ const sendReview = async (review, RestaurantId)=> {
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, *same-origin, omit
-        body: review, RestaurantId
+        body: review
         })
 }
