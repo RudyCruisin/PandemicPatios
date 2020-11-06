@@ -1,0 +1,30 @@
+body {
+    background-color: black;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    /* height: auto; */
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    
+}
+
+#top {
+    background-color: purple;
+    height: 5vh;
+}
+
+#middle {
+    background-color: silver;
+    height: 80vh;
+}
+
+#bottom {
+    background-color: slategrey;
+    height: 5vh;
+}

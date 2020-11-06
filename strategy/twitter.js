@@ -21,8 +21,6 @@ router.use(session({
     maxAge: (24 * 60 * 60 * 1000)
 }))
 
-
-
 //Setting up Twitter Stategy with passport
 passport.use(new TwitterStrategy({
     consumerKey: process.env.TWIT_ID,
