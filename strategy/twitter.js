@@ -35,15 +35,24 @@ passport.use(new TwitterStrategy({
         //console.log(profile.username)
         //console.log("Access Token: "+ accessToken)
         console.log("Twitter Login Successful")
-        let user = await db.User.findOne({ where: { TWIT_ID: (profile.id) }})
+        let user = await db.User.findOne(
+            { 
+                where: { 
+                    authId: profile.id,
+                    authStrat: process.env.TWIT_DBID
+                    }
+                
+            }
+        )
 
         if (!user) {
             user = await db.User.build({
-                TWIT_ID: profile.id,
+                authId: profile.id,
                 username: profile.username,
                 createAt: new Date(),
                 updatedAt: new Date(),
                 email: profile.email,
+                authStrat: process.env.TWIT_DBID
             })
             await user.save();
         }

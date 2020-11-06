@@ -10,8 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.oAuths.hasMany(models.User)
-      models.User.belongsTo(models.oAuths)
+      models.oAuth.hasMany(models.User, {
+        foreignKey: 'authStrat'
+      })
+      models.User.belongsTo(models.oAuth, {
+        foreignKey: 'authStrat'
+      })
     }
   };
   User.init({
@@ -21,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     FB_ID: DataTypes.STRING,
     TWIT_ID: DataTypes.STRING,
     GOOG_ID: DataTypes.STRING,
-    // auth_ID: DataTypes.STRING,
+    authId: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'User',
