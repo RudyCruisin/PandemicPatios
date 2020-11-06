@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'oAuth',
-    freezeTableName: true
   });
   return oAuth;
 };
