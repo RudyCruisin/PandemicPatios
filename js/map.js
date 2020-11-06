@@ -15,7 +15,7 @@ function initAutocomplete(map) {
     const input = document.getElementById("pac-input");
     // restrict to only cities in the US
     const options = {
-        types: ['(regions)'],
+        types: ['(cities)'],
         componentRestrictions: {country: 'us'}
       };
       const autocomplete = new google.maps.places.Autocomplete(input, options);
@@ -30,7 +30,6 @@ function initAutocomplete(map) {
 
 // GET RESTAURANTS FROM DB
 function getRestaurants() {
-    console.log("hello world")
     return fetch('/restaurant/getAll')
     .then(response => response.json())
     .then((data) => {
@@ -63,7 +62,7 @@ function renderMarkers(restaurants, map) {
         // CREATES A POPUP FOR THE MARKER
         let infowindow = new google.maps.InfoWindow({
             content: `<h6>${marker.restaurantName}</h6>
-            <p>${marker.restaurantPhone}</p>
+            <p>Phone Number:${marker.restaurantPhone}</p>
             <a href="../form">Review ${marker.restaurantName}</a>`
         });
 
@@ -110,6 +109,8 @@ function renderMarkersInBoundary(restaurants, boundaryCir, map) {
 // THIS IS THE GOOGLE MAPS CALLBACK FUNCTION IN THE SCRIPT TAG
 async function runApp() {
 
+    //google.maps.event.addDomListener(window, 'load', displayMap());
+
     // ADD NEW GOOGLE MAP
     const map = displayMap(); 
 
@@ -122,6 +123,12 @@ async function runApp() {
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(weatherCard);
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(covidCard);
     
+    // ADD ATLANTA WEATHER TO WEATHER CARD ON STARTUP OF MAP
+    getWeatherAtlanta()
+
+    // ADD GEORGIA COVID DATA TO COVID CARD ON STARTUP OF MAP
+    getGACovidData()
+
     // ADD AUTOCOMPLETE FUNCTIONALITY
     const autocomplete = initAutocomplete(map);
     
@@ -237,6 +244,21 @@ function drawWeather(data) {
     document.getElementById('humidity').innerHTML = data.main.humidity + '% Humidity';
 }
 
+// WEATHER API STUFF AT STARTUP --> ATLANTA INFO
+function getWeatherAtlanta() {
+
+    // SET LAT & LONG FOR WEATHER API
+    const lat = 33.7537
+    const long = -84.3863
+
+    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
+    .then(response => response.json())
+    .then(data => {
+        drawWeather(data);
+    })
+    .catch(err => console.log(err))
+}
+
 // COVID Data Stuff
 
 function getCovidData(placeResult) {
@@ -259,6 +281,29 @@ function drawCovid(placeResult, data) {
     const state = placeResult.address_components[2].long_name;
 
     document.getElementById('state').innerHTML = state;
+    document.getElementById('cases').innerHTML = `Increase in Cases: ${data.positiveIncrease}`;
+    document.getElementById('hospitalizations').innerHTML = `Increase in Hospitalizations: ${data.hospitalizedIncrease}`;
+    document.getElementById('deaths').innerHTML = `Increase in Deaths: ${data.deathIncrease}`;
+} 
+
+// COVID API STUFF AT STARTUP -- GEORGIA
+function getGACovidData() {
+
+    // THIS IS THE STATE CODE FROM THE AUTOCOMPLETE RESULT
+    const state_short = "ga";
+
+    fetch(`https://api.covidtracking.com/v1/states/${state_short}/current.json`)
+    .then(response => response.json())
+    .then(data => {
+        //console.log(data);
+        drawGACovid(data);
+    })
+    .catch(err => console.log(err))
+}
+
+function drawGACovid(data) {
+
+    document.getElementById('state').innerHTML = "Georgia";
     document.getElementById('cases').innerHTML = `Increase in Cases: ${data.positiveIncrease}`;
     document.getElementById('hospitalizations').innerHTML = `Increase in Hospitalizations: ${data.hospitalizedIncrease}`;
     document.getElementById('deaths').innerHTML = `Increase in Deaths: ${data.deathIncrease}`;
