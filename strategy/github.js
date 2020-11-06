@@ -2,6 +2,7 @@ require('dotenv').config()
 const bodyParser = require('body-parser')
 const express = require('express')
 const passport = require('passport')
+const session = require('express-session')
 const db = require('../models')
 const GitHubStrategy = require('passport-github').Strategy
 
@@ -15,6 +16,11 @@ router.get("/home", (req, res) => {
     })
 })
 
+router.use(session({
+    secret: 'githubPatio',
+    maxAge: (24 * 60 * 60 * 1000)
+}))
+
 //Setting up Github Strategy with passport
 
 passport.use(new GitHubStrategy({
@@ -23,18 +29,24 @@ passport.use(new GitHubStrategy({
     callbackURL: process.env.GH_CALLBACK
 },
     async function (accessToken, refreshToken, profile, cb) {
-        console.log((profile))
-        console.log("Access Token: " + accessToken)
-
-        let user = await db.User.findOne({ where: { GH_ID: (profile.id) }})
+        console.log(("Github Login Successful"))
+        let user = await db.User.findOne(
+            {
+                where: {
+                    authId: profile.id,
+                    authStrat: process.env.GH_DBID
+                }
+            }
+        )
 
         if (!user) {
             user = await db.User.build({
-                GH_ID: (profile.id),
+                authId: profile.id,
                 username: profile.username,
                 createAt: new Date(),
                 updatedAt: new Date(),
                 email: profile.email,
+                authStrat: process.env.GH_DBID
             })
             await user.save();
         }

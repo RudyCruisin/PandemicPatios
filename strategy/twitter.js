@@ -17,8 +17,8 @@ router.get('/twithome', (req, res) => {
 })
 
 router.use(session({
-    secret: 'magicPatio',
-    maxAge: (24*60*1000*60)
+    secret: 'twitPatio',
+    maxAge: (24 * 60 * 60 * 1000)
 }))
 
 
@@ -28,22 +28,27 @@ passport.use(new TwitterStrategy({
     consumerKey: process.env.TWIT_ID,
     consumerSecret: process.env.TWIT_SECRET,
     callbackURL: process.env.TWIT_CALLBACK,
-    // profileFields: ['email', 'name']
 },
     async function (accessToken, refreshToken, profile, cb) {
-        //console.log(profile)
-        //console.log(profile.username)
-        //console.log("Access Token: "+ accessToken)
         console.log("Twitter Login Successful")
-        let user = await db.User.findOne({ where: { TWIT_ID: (profile.id) }})
+        let user = await db.User.findOne(
+            {
+                where: {
+                    authId: profile.id,
+                    authStrat: process.env.TWIT_DBID
+                }
+
+            }
+        )
 
         if (!user) {
             user = await db.User.build({
-                TWIT_ID: profile.id,
+                authId: profile.id,
                 username: profile.username,
                 createAt: new Date(),
                 updatedAt: new Date(),
                 email: profile.email,
+                authStrat: process.env.TWIT_DBID
             })
             await user.save();
         }
