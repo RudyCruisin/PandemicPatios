@@ -56,9 +56,12 @@ router.delete('/:id', async (req, res)=> {
 
 router.post('/add', loggedIn,  async (req, res)=> {
     //gets logged in user's authID
+
+
+
     const UserId = req.user.id
     //passes UserId to getAuthID in order to return Id of that user
-    const authId = await getAuthID(UserId)
+    const authId = await getAuthID(UserId, strat)
     const { maskRating, socialDistancingRating, sanitationRating, alcohol, foodRating, serviceRating, atmosphere, patioSpaceRating, petFriendly } = req.body
 
     const newReview = await db.Review.create({
@@ -107,7 +110,6 @@ const getAuthID = async (id, strat)=> {
     })
 
     user = await user.json()
-    console.log(user[0].provider)
     return user[0].id
     
 }
