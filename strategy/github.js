@@ -30,6 +30,7 @@ passport.use(new GitHubStrategy({
 },
     async function (accessToken, refreshToken, profile, cb) {
         console.log(("Github Login Successful"))
+        //console.log(profile)
         let user = await db.User.findOne(
             {
                 where: {

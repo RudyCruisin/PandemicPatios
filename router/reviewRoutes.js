@@ -55,11 +55,28 @@ router.delete('/:id', async (req, res)=> {
 })
 
 router.post('/add', loggedIn,  async (req, res)=> {
+    console.log(req.user.provider)
     //gets logged in user's authID
     const UserId = req.user.id
     //passes UserId to getAuthID in order to return Id of that user
-    const authId = await getAuthID(UserId)
-    const { maskRating, socialDistancingRating, sanitationRating, alcohol, foodRating, serviceRating, atmosphere, patioSpaceRating, petFriendly } = req.body
+    var strat;
+
+    if (req.user.provider == "twitter") {
+        strat = 1
+    }
+    else if (req.user.provider == "facebook") {
+        strat = 2
+    }
+    else if (req.user.provider == "google") {
+        strat = 3
+    }
+    else if (req.user.provider == "github") {
+        strat = 4
+    }
+
+    const authId = await getAuthID(UserId, strat)
+    console.log(authId)
+    const { maskRating, socialDistancingRating, sanitationRating, alcohol, foodRating, serviceRating, atmosphere, patioSpaceRating, petFriendly, RestaurantId } = req.body
 
     const newReview = await db.Review.create({
         maskRating,
@@ -71,7 +88,7 @@ router.post('/add', loggedIn,  async (req, res)=> {
         atmosphere,
         patioSpaceRating,
         petFriendly,
-        //RestaurantId,
+        RestaurantId,
         UserId: authId
     })
 
@@ -93,9 +110,9 @@ router.patch('/update/:id', async (req, res)=> {
 
 
 //returns ID field of user when passed an authID
-const getAuthID = async (id)=> {
+const getAuthID = async (id, strat)=> {
 
-    var user = await fetch(`http://localhost:9000/user/reviewUser/${id}`, {
+    var user = await fetch(`http://localhost:9000/user/reviewUser/${id}/${strat}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -107,7 +124,7 @@ const getAuthID = async (id)=> {
     })
 
     user = await user.json()
-
+    console.log(user[0].provider)
     return user[0].id
     
 }

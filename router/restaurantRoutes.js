@@ -27,7 +27,18 @@ router.post('/add', async (req, res)=> {
 router.get('/getAll', async (req, res) => {
     const restaurants = await db.Restaurant.findAll();
     res.json(restaurants);
-  });
+});
+
+//gets restaurant by DB
+router.get('/getRestaurant/:id', async (req, res) => {
+    const restId = req.params.id;
+    const restaurant = await db.Restaurant.findAll({
+        where: {
+            id: restId
+        }
+    })
+        res.send(restaurant)
+});
 
 //deletes restaurant from DB 
 router.delete('/remove/:id', async (req, res)=> {

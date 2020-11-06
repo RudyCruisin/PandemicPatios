@@ -8,10 +8,15 @@ const stringifyFormData = fd => {
 
 const handleSubmit = e => {
     e.preventDefault();
+    let restaurantId = localStorage.getItem("restaurantId");
     const data = new FormData(e.target);
+    console.log(data)
+    data.append('RestaurantId', restaurantId);
     const stringified = stringifyFormData(data)
     sendReview(stringified)
     window.location.assign("/")
+    console.log(stringified)
+
 }
 
 //$("#form").on("submit", handleSubmit())
@@ -20,8 +25,7 @@ const form = document.getElementById('form')
 form.addEventListener('submit', handleSubmit)
 
 
-const sendReview = async (review)=> {
-    console.log(review)
+const sendReview = async (review, RestaurantId)=> {
     await fetch ('/review/add', {
         method: 'POST',
         headers: {
