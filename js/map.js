@@ -29,34 +29,15 @@ function initAutocomplete(map) {
 }
 
 // GET RESTAURANTS FROM DB
-async function getRestaurants() {
+function getRestaurants() {
     console.log("hello world")
-    fetch('/restaurant/getAll')
+    return fetch('/restaurant/getAll')
     .then(response => response.json())
     .then((data) => {
         console.log("you are in the getRestaurants()", data)
         return data
     })
-}
-
-getRestaurants();
-
-// GEOCODING API -- TURNING RESTAURANT ADDRESSES INTO LAT/LONG COORDINATES
-const googleMapsAPIKey = 'AIzaSyDylyELTw5HP6i0KIEp7jyIWTva_SdH2IQ';
-const locations = [
-      { name: "Hutton & Smith", address: "431 East Martin Luther King Blvd Suite 120", city: "Chattanooga", state: "TN", zipcode: 37403},
-      { name: "Edley's", address: "205 Manufacturers Rd Suite 110", city: "Chattanooga", state: "TN", zipcode: 37405 },
-      { name: "Heaven & Ale - Southside", address: "338 E Main St", city: "Chattanooga", state: "TN", zipcode: 37408 },
-      { name: "Krog Street Market", address: "99 Krog St NE", city: "Atlanta", state: "GA", zipcode: 30307 },
-]
-
-async function geocodeRestaurants(locationsToGeocode) {
-    let locationPromises = locationsToGeocode.map((currentRestaurant) => {
-        return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${currentRestaurant.address},+${currentRestaurant.city},+${currentRestaurant.state}&key=${googleMapsAPIKey}`)
-          .then((response) => response.json())
-          .catch((err) => console.log(err))
-        });
-    return await Promise.all(locationPromises);
+    .catch(err => console.log(err))
 }
 
 // NEED A GLOBAL ARRAY OF ALL MARKERS SO CAN CLEAR MAP BEFORE EACH AUTOCOMPLETE RESULT
@@ -64,11 +45,12 @@ let restaurantMarkers = [];
 
 // RENDER FUNCTION FOR RESTAURANT MARKERS
 function renderMarkers(restaurants, map) {
+    console.log("you are in renderMarkers", restaurants);
     restaurants.forEach((currentRestaurant) => {
 
         // CREATES A MARKER
         let marker = new google.maps.Marker({
-            position: currentRestaurant.results[0].geometry.location,
+            position: {lat: currentRestaurant.lat, lng: currentRestaurant.lng},
             map: map,
         });
         
@@ -101,9 +83,10 @@ function renderMarkersInBoundary(restaurants, boundaryCir, map) {
     // A NEW ARRAY FOR ONLY THE MARKERS WITHIN THE BOUNDARY
     let restaurantsInBoundary = [];
 
+    console.log("you are in renderMarkersInBoundary", restaurants);
     // GETS LAT/LONGS OF CURRENT RESTAURANT & BOUNDARY CENTER & THEN USES GEOMETRY LIBRARY TO FIND THE DISTANCE BETWEEN
     restaurants.forEach((currentRestaurant) => {
-        let marker_lat_lng = new google.maps.LatLng(currentRestaurant.results[0].geometry.location.lat, currentRestaurant.results[0].geometry.location.lng);
+        let marker_lat_lng = new google.maps.LatLng(currentRestaurant.lat, currentRestaurant.lng);
         let boundaryCirCenter = new google.maps.LatLng(boundaryCir.center.lat(), boundaryCir.center.lng());
         let distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(boundaryCirCenter, marker_lat_lng);
         
@@ -161,11 +144,11 @@ async function runApp() {
         radius: 8046.72,  // in meters, so this is technically ~5 miles
     });
 
-    // TURNS ADDRESSES INTO LAT LONG FOR EACH RESTAURANT
-    const geocodedRestaurants = await geocodeRestaurants(locations);
+    // GETS ALL RESTAURANTS FROM DB
+    const restaurantsFromDB = await getRestaurants();
 
     // RENDERS ALL RESTAURANT MARKERS ON MAP WHEN MAP LOADS
-    renderMarkers(geocodedRestaurants, map);
+    renderMarkers(restaurantsFromDB, map);
 
     // ADD EVENT LISTENER TO AUTOCOMPLETE SEARCH
     autocomplete.addListener("place_changed", () => {
@@ -196,15 +179,15 @@ async function runApp() {
 
 
       // ADD RESTAURANT MARKERS HERE -- ONLY WITHIN BOUNDARY CIRCLE
-      renderMarkersInBoundary(geocodedRestaurants, boundaryCircle, map)
+      renderMarkersInBoundary(restaurantsFromDB, boundaryCircle, map)
 
       // ALLOW FOR USER TO DESELECT BOUNDARY AND SEE ALL RESTAURANTS NEARBY. ALSO ALLOWS USER TO RESELECT GIVEN BOUNDARY
       boundaryCheckbox.addEventListener('change', (e) => {
         if (e.target.checked) {
-            renderMarkers(geocodedRestaurants, map);
+            renderMarkers(restaurantsFromDB, map);
             boundaryCircle.setVisible(false);
         } else {
-            renderMarkersInBoundary(geocodedRestaurants, boundaryCircle, map);
+            renderMarkersInBoundary(restaurantsFromDB, boundaryCircle, map)
             boundaryCircle.setVisible(true);
         }
       });
