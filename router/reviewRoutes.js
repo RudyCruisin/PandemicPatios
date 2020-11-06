@@ -10,7 +10,7 @@ function loggedIn(req, res, next) {
     if(req.user){
         next()
     } else {
-
+        res.redirect('/')
     }
 
 }
@@ -55,10 +55,10 @@ router.delete('/:id', async (req, res)=> {
 })
 
 router.post('/add', loggedIn,  async (req, res)=> {
-    
+    //gets logged in user's authID
     const UserId = req.user.id
+    //passes UserId to getAuthID in order to return Id of that user
     const authId = await getAuthID(UserId)
-    console.log(authId)
     const { maskRating, socialDistancingRating, sanitationRating, alcohol, foodRating, serviceRating, atmosphere, patioSpaceRating, petFriendly } = req.body
 
     const newReview = await db.Review.create({
@@ -92,7 +92,7 @@ router.patch('/update/:id', async (req, res)=> {
 
 
 
-
+//returns ID field of user when passed an authID
 const getAuthID = async (id)=> {
 
     var user = await fetch(`http://localhost:9000/user/reviewUser/${id}`, {
