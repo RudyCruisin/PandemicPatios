@@ -2,6 +2,7 @@ require('dotenv').config()
 const bodyParser = require('body-parser')
 const express = require('express')
 const passport = require('passport')
+const session = require('express-session')
 const db = require('../models')
 const FacebookStrategy = require('passport-facebook').Strategy
 
@@ -15,26 +16,37 @@ router.get('/fbhome', (req, res) => {
     })
 })
 
+router.use(session({
+    secret: 'facebookPatio',
+    maxAge: (24 * 60 * 60 * 1000)
+}))
+
 //Setting up Facebook Stategy with passport
 
 passport.use(new FacebookStrategy({
     clientID: process.env.FB_ID,
     clientSecret: process.env.FB_SECRET,
     callbackURL: process.env.FB_CALLBACK,
-    // profileFields: ['email', 'name']
 },
     async function (accessToken, refreshToken, profile, cb) {
-        console.log((profile))
-        console.log("Access Token: "+ accessToken)
-        let user = await db.User.findOne({ where: { FB_ID: (profile.id) }})
+        console.log(("Facebook Login Successful"))
+        let user = await db.User.findOne(
+            {
+                where: {
+                    authId: profile.id,
+                    authStrat: process.env.FB_DBID
+                }
+            }
+        )
 
         if (!user) {
             user = await db.User.build({
-                FB_ID: (profile.id),
+                authId: profile.id,
                 username: profile.displayName,
                 createAt: new Date(),
                 updatedAt: new Date(),
-                email: profile.email
+                email: profile.email,
+                authStrat: process.env.FB_DBID
             })
             await user.save();
         }
