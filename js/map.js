@@ -52,18 +52,26 @@ function renderMarkers(restaurants, map) {
         let marker = new google.maps.Marker({
             position: {lat: currentRestaurant.lat, lng: currentRestaurant.lng},
             map: map,
+            restaurantId: currentRestaurant.id,
+            restaurantName: currentRestaurant.name,
+            restaurantPhone: currentRestaurant.phoneNumber
         });
         
         restaurantMarkers.push(marker);
+        
 
         // CREATES A POPUP FOR THE MARKER
         let infowindow = new google.maps.InfoWindow({
-            content: `<a href="../form">Review this Patio</a>`
+            content: `<h6>${marker.restaurantName}</h6>
+            <p>${marker.restaurantPhone}</p>
+            <a href="../form">Review ${marker.restaurantName}</a>`
         });
 
         // ADDS CLICK EVENT LISTENER TO MARKER
-        google.maps.event.addListener(marker, "click", function () {
+        google.maps.event.addListener(marker, "click", function (e) {
             infowindow.open(map, marker);
+            localStorage.setItem("restaurantId", marker.restaurantId.toString());
+            console.log(marker);
         });
     });
 }

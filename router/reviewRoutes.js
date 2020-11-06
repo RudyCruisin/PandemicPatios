@@ -55,14 +55,31 @@ router.delete('/:id', async (req, res)=> {
 })
 
 router.post('/add', loggedIn,  async (req, res)=> {
+    console.log(req.user.provider)
     //gets logged in user's authID
 
 
 
     const UserId = req.user.id
     //passes UserId to getAuthID in order to return Id of that user
+    var strat;
+
+    if (req.user.provider == "twitter") {
+        strat = 1
+    }
+    else if (req.user.provider == "facebook") {
+        strat = 2
+    }
+    else if (req.user.provider == "google") {
+        strat = 3
+    }
+    else if (req.user.provider == "github") {
+        strat = 4
+    }
+
     const authId = await getAuthID(UserId, strat)
-    const { maskRating, socialDistancingRating, sanitationRating, alcohol, foodRating, serviceRating, atmosphere, patioSpaceRating, petFriendly } = req.body
+    console.log(authId)
+    const { maskRating, socialDistancingRating, sanitationRating, alcohol, foodRating, serviceRating, atmosphere, patioSpaceRating, petFriendly, RestaurantId } = req.body
 
     const newReview = await db.Review.create({
         maskRating,
@@ -74,7 +91,7 @@ router.post('/add', loggedIn,  async (req, res)=> {
         atmosphere,
         patioSpaceRating,
         petFriendly,
-        //RestaurantId,
+        RestaurantId,
         UserId: authId
     })
 
