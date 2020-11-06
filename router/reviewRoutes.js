@@ -94,9 +94,9 @@ router.patch('/update/:id', async (req, res)=> {
 
 
 //returns ID field of user when passed an authID
-const getAuthID = async (id)=> {
+const getAuthID = async (id, strat)=> {
 
-    var user = await fetch(`http://localhost:9000/user/reviewUser/${id}`, {
+    var user = await fetch(`http://localhost:9000/user/reviewUser/${id}/${strat}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -108,7 +108,7 @@ const getAuthID = async (id)=> {
     })
 
     user = await user.json()
-
+    console.log(user[0].provider)
     return user[0].id
     
 }
