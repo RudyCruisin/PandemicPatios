@@ -30,6 +30,7 @@ passport.use(new FacebookStrategy({
 },
     async function (accessToken, refreshToken, profile, cb) {
         console.log(("Facebook Login Successful"))
+        console.log(profile)
         let user = await db.User.findOne(
             {
                 where: {
