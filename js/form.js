@@ -8,6 +8,7 @@ const stringifyFormData = fd => {
 
 const handleSubmit = e => {
     e.preventDefault();
+    let restaurantId = localStorage.getItem("restaurantId");
     const data = new FormData(e.target);
     const stringified = stringifyFormData(data)
     sendReview(stringified)
@@ -20,7 +21,7 @@ const form = document.getElementById('form')
 form.addEventListener('submit', handleSubmit)
 
 
-const sendReview = async (review)=> {
+const sendReview = async (review, RestaurantId)=> {
     console.log(review)
     await fetch ('/review/add', {
         method: 'POST',
@@ -31,6 +32,6 @@ const sendReview = async (review)=> {
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, *same-origin, omit
-        body: review
+        body: review, RestaurantId
         })
 }

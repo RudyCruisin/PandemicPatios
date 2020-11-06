@@ -59,7 +59,7 @@ router.post('/add', loggedIn,  async (req, res)=> {
     const UserId = req.user.id
     const authId = await getAuthID(UserId)
     console.log(authId)
-    const { maskRating, socialDistancingRating, sanitationRating, alcohol, foodRating, serviceRating, atmosphere, patioSpaceRating, petFriendly } = req.body
+    const { maskRating, socialDistancingRating, sanitationRating, alcohol, foodRating, serviceRating, atmosphere, patioSpaceRating, petFriendly, RestaurantId } = req.body
 
     const newReview = await db.Review.create({
         maskRating,
@@ -71,7 +71,7 @@ router.post('/add', loggedIn,  async (req, res)=> {
         atmosphere,
         patioSpaceRating,
         petFriendly,
-        //RestaurantId,
+        RestaurantId,
         UserId: authId
     })
 
