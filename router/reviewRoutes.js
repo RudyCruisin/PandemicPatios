@@ -33,6 +33,99 @@ router.get('/restaurant/:resID', async (req, res)=> {
     })
     res.send(resRev);
 })
+
+// Sends averages from all reviews for a specific restaurant
+router.get('/restaurant/reviews/:resID', async (req, res) => {
+    const resID = req.params.resID;
+    let allReviews = await avgReviews(resID);
+    console.log("this is allReviews from the router", allReviews);
+    reviewsHTML = `<html>
+    <head>
+    </head>
+    <body>
+        <div>
+            <h1>Reviews</h1>
+            <ul>
+                <li>
+                    Mask Rating: ${allReviews.maskAvg}
+                </li>
+                <li>
+                    Social Distancing Rating: ${allReviews.socialDistancingAvg}
+                </li>
+                <li>
+                    Sanitation Rating: ${allReviews.sanitationAvg}
+                </li>
+                <li>
+                    Alcohol: TBD
+                </li>
+                <li>
+                    Food Rating: ${allReviews.foodAvg}
+                </li>
+                <li>
+                    Service Rating: TBD
+                </li>
+                <li>
+                    Atmosphere: TBD
+                </li>
+                <li>
+                    Patio Space Rating: ${allReviews.patioAvg}
+                </li>
+                <li>
+                    Pet Friendly: TBD
+                </li>
+            </ul>
+            <a href="/form">Add Your Review</a>
+            <a href="/">Go Back to the Main Page</a>
+        </div>
+    </body>
+</html>`
+    res.send(reviewsHTML);
+})
+
+async function avgReviews(resID) {
+    var restReviews = await fetch(`http://localhost:9000/review/restaurant/${resID}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+    })
+
+    restReviews = await restReviews.json()
+    
+    let revLength = restReviews.length;
+    // Creating the variables to make averages for each category
+    let maskTotal = 0;
+    let socialDistancingTotal = 0;
+    let sanitationTotal = 0;
+    let foodTotal = 0;
+    let patioTotal = 0;
+
+    // Goes through all the reviews and sums up each category total
+    for(let i=0; i<revLength; i++) {
+        maskTotal += restReviews[i].maskRating;
+        socialDistancingTotal += restReviews[i].socialDistancingRating;
+        sanitationTotal += restReviews[i].sanitationRating;
+        foodTotal += restReviews[i].foodRating;
+        patioTotal += restReviews[i].patioSpaceRating;
+    }
+
+    // Find the average of each
+    let avgRestReviews = {
+        maskAvg : Math.round((maskTotal / revLength) * 10) / 10,
+        socialDistancingAvg : Math.round((socialDistancingTotal / revLength) * 10) / 10,
+        sanitationAvg : Math.round((sanitationTotal / revLength) * 10) / 10,
+        foodAvg : Math.round((foodTotal / revLength) * 10) / 10,
+        patioAvg : Math.round((foodTotal / revLength) * 10) / 10
+
+    }
+
+    console.log(avgRestReviews)
+    return avgRestReviews
+}
+
 //Sends every review made by a specific user
 router.get('/user/:userID', async (req, res)=> {
     const userID = req.params.userID;
@@ -57,6 +150,9 @@ router.delete('/:id', async (req, res)=> {
 router.post('/add', loggedIn,  async (req, res)=> {
     console.log(req.user.provider)
     //gets logged in user's authID
+
+
+
     const UserId = req.user.id
     //passes UserId to getAuthID in order to return Id of that user
     var strat;
@@ -124,7 +220,6 @@ const getAuthID = async (id, strat)=> {
     })
 
     user = await user.json()
-    console.log(user[0].provider)
     return user[0].id
     
 }
