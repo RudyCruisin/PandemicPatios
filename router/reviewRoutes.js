@@ -110,13 +110,13 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
                 <h3>COVID-19 Ratings</h3>
                 <ul>
                     <li>
-                        Mask Rating: <span>3</span>
+                        Mask Rating: <span>${allReviews.maskAvg}</span>
                     </li>
                     <li>
-                        Social Distancing Rating: <span>3</span>
+                        Social Distancing Rating: <span>${allReviews.socialDistancingAvg}</span>
                     </li>
                     <li>
-                        Sanitation Rating: <span>3</span>
+                        Sanitation Rating: <span>${allReviews.sanitationAvg}</span>
                     </li>
                 </ul>
             </div>
@@ -125,13 +125,13 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
                 <h3>Food and Service Ratings</h3>
                 <ul>
                     <li>
-                        Alcohol: <span>3</span>
+                        Alcohol: <span>Alcohol</span>
                     </li>
                     <li>
-                        Food Rating: <span>3</span>
+                        Food Rating: <span>${allReviews.foodAvg}</span>
                     </li>
                     <li>
-                        Service Rating: <span>3</span>
+                        Service Rating: <span>${allReviews.serviceAvg}</span>
                     </li>
                 </ul>
             </div>
@@ -140,13 +140,13 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
                 <h3>Patio Ratings</h3>
                 <ul>
                     <li>
-                        Atmosphere: <span>3</span>
+                        Atmosphere: <span>Atmosphere</span>
                     </li>
                     <li>
-                        Patio Space Rating: <span>3</span>
+                        Patio Space Rating: <span>${allReviews.patioAvg}</span>
                     </li>
                     <li>
-                        Pet Friendly: <span>3</span>
+                        Pet Friendly: <span>Pets</span>
                     </li>
                 </ul>
             </div>
