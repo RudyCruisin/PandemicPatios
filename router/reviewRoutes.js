@@ -57,6 +57,9 @@ router.delete('/:id', async (req, res)=> {
 router.post('/add', loggedIn,  async (req, res)=> {
     console.log(req.user.provider)
     //gets logged in user's authID
+
+
+
     const UserId = req.user.id
     //passes UserId to getAuthID in order to return Id of that user
     var strat;
@@ -124,7 +127,6 @@ const getAuthID = async (id, strat)=> {
     })
 
     user = await user.json()
-    console.log(user[0].provider)
     return user[0].id
     
 }
