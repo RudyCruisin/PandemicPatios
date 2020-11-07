@@ -56,22 +56,22 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
                     Sanitation Rating: ${allReviews.sanitationAvg}
                 </li>
                 <li>
-                    Alcohol: TBD
+                    Has Alcohol: ${allReviews.alcoholAvg}
                 </li>
                 <li>
                     Food Rating: ${allReviews.foodAvg}
                 </li>
                 <li>
-                    Service Rating: TBD
+                    Service Rating: ${allReviews.serviceAvg}
                 </li>
                 <li>
-                    Atmosphere: TBD
+                    Type of Atmosphere: ${allReviews.atmosphereAvg}
                 </li>
                 <li>
                     Patio Space Rating: ${allReviews.patioAvg}
                 </li>
                 <li>
-                    Pet Friendly: TBD
+                    Is Pet Friendly: ${allReviews.petFriendlyAvg}
                 </li>
             </ul>
             <a href="/form">Add Your Review</a>
@@ -94,22 +94,49 @@ async function avgReviews(resID) {
     })
 
     restReviews = await restReviews.json()
-    
+
     let revLength = restReviews.length;
     // Creating the variables to make averages for each category
     let maskTotal = 0;
     let socialDistancingTotal = 0;
     let sanitationTotal = 0;
+    let alcoholTotal = {"Yes": 0, "No": 0};
     let foodTotal = 0;
+    let serviceTotal = 0;
+    let atmosphere = [];
     let patioTotal = 0;
+    let petFriendlyTotal = {"Yes": 0, "No": 0};
 
     // Goes through all the reviews and sums up each category total
     for(let i=0; i<revLength; i++) {
+        // sum up all the ratings for each category
         maskTotal += restReviews[i].maskRating;
         socialDistancingTotal += restReviews[i].socialDistancingRating;
         sanitationTotal += restReviews[i].sanitationRating;
         foodTotal += restReviews[i].foodRating;
+        serviceTotal += restReviews[i].serviceRating;
         patioTotal += restReviews[i].patioSpaceRating;
+
+        //keep track of the yes and no responses for alcohol and petfriendly
+        if (restReviews[i].alcohol === "yes") {
+            alcoholTotal["Yes"] += 1
+        }
+        else {
+            alcoholTotal["No"] += 1
+        }
+
+        if (restReviews[i].petFriendly === "yes") {
+            petFriendlyTotal["Yes"] += 1
+        }
+        else {
+            petFriendlyTotal["No"] += 1
+        }
+
+        //only add an atmosphere response if it is not in the array already
+        if(atmosphere.indexOf(restReviews[i].atmosphere) === -1) {
+            atmosphere.push(restReviews[i].atmosphere)
+        }
+
     }
 
     // Find the average of each
@@ -117,8 +144,12 @@ async function avgReviews(resID) {
         maskAvg : Math.round((maskTotal / revLength) * 10) / 10,
         socialDistancingAvg : Math.round((socialDistancingTotal / revLength) * 10) / 10,
         sanitationAvg : Math.round((sanitationTotal / revLength) * 10) / 10,
+        alcoholAvg: JSON.stringify(alcoholTotal),
         foodAvg : Math.round((foodTotal / revLength) * 10) / 10,
-        patioAvg : Math.round((foodTotal / revLength) * 10) / 10
+        serviceAvg : Math.round((serviceTotal / revLength) * 10) / 10,
+        patioAvg : Math.round((patioTotal / revLength) * 10) / 10,
+        atmosphereAvg: atmosphere,
+        petFriendlyAvg: JSON.stringify(petFriendlyTotal)
 
     }
 
