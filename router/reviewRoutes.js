@@ -114,11 +114,11 @@ async function avgReviews(resID) {
 
     // Find the average of each
     let avgRestReviews = {
-        maskAvg : maskTotal / revLength,
-        socialDistancingAvg : socialDistancingTotal / revLength,
-        sanitationAvg : sanitationTotal / revLength,
-        foodAvg : foodTotal / revLength,
-        patioAvg : foodTotal / revLength
+        maskAvg : Math.round((maskTotal / revLength) * 10) / 10,
+        socialDistancingAvg : Math.round((socialDistancingTotal / revLength) * 10) / 10,
+        sanitationAvg : Math.round((sanitationTotal / revLength) * 10) / 10,
+        foodAvg : Math.round((foodTotal / revLength) * 10) / 10,
+        patioAvg : Math.round((foodTotal / revLength) * 10) / 10
 
     }
 
