@@ -21,12 +21,12 @@ module.exports = (sequelize, DataTypes) => {
     maskRating: DataTypes.INTEGER,
     socialDistancingRating: DataTypes.INTEGER,
     sanitationRating: DataTypes.INTEGER,
-    alcohol: DataTypes.STRING,
+    alcohol: DataTypes.BOOLEAN,
     foodRating: DataTypes.INTEGER,
     serviceRating: DataTypes.INTEGER,
     atmosphere: DataTypes.STRING, 
     patioSpaceRating: DataTypes.INTEGER,
-    petFriendly: DataTypes.STRING
+    petFriendly: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Review',

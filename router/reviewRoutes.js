@@ -41,42 +41,119 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
     console.log("this is allReviews from the router", allReviews);
     reviewsHTML = `<html>
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
+    <style>
+    .container {
+        font-family: Impact, Charcoal, sans-serif;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        margin-top: 10px;
+    }
+    
+    .container ul {
+        list-style-type: none;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20;
+        text-align: center;
+    }
+    
+    .container li {
+        display: inline;
+        margin: 10px;
+    }
+    
+    .container li > span {
+        font-weight: bold;
+        color: blue;
+    }
+    
+    .name {
+        position: relative;
+        text-align: center;
+        font-size: 40;
+    }
+    
+    .container a{
+        align-self: center;
+    }
+    
+    .covid h3 {
+        color: red;
+    }
+    
+    .food h3 {
+        color: darkgreen;
+    }
+    
+    .patio h3 {
+        color: orange
+    }
+    
+    .container h3 {
+        position: relative;
+        text-align: center;
+        font-size: 30;
+    }
+    .reviews div {
+        margin: 50px
+    }
+    </style>
     <body>
-        <div>
-            <h1>Reviews</h1>
-            <ul>
-                <li>
-                    Mask Rating: ${allReviews.maskAvg}
-                </li>
-                <li>
-                    Social Distancing Rating: ${allReviews.socialDistancingAvg}
-                </li>
-                <li>
-                    Sanitation Rating: ${allReviews.sanitationAvg}
-                </li>
-                <li>
-                    Has Alcohol: ${allReviews.alcoholAvg}
-                </li>
-                <li>
-                    Food Rating: ${allReviews.foodAvg}
-                </li>
-                <li>
-                    Service Rating: ${allReviews.serviceAvg}
-                </li>
-                <li>
-                    Type of Atmosphere: ${allReviews.atmosphereAvg}
-                </li>
-                <li>
-                    Patio Space Rating: ${allReviews.patioAvg}
-                </li>
-                <li>
-                    Is Pet Friendly: ${allReviews.petFriendlyAvg}
-                </li>
-            </ul>
-            <a href="/form">Add Your Review</a>
-            <a href="/">Go Back to the Main Page</a>
+    <div class="container">
+            <h1 class="name">Name of Restaurant</h1>
+            <a href="/form"><button type="button" class="btn btn-outline-success">Add your Review</button></a>
+        <div class="reviews">
+            <div class="covid">
+                <h3>COVID-19 Ratings</h3>
+                <ul>
+                    <li>
+                        Mask Rating: <span>${allReviews.maskAvg}</span>
+                    </li>
+                    <li>
+                        Social Distancing Rating: <span>${allReviews.socialDistancingAvg}</span>
+                    </li>
+                    <li>
+                        Sanitation Rating: <span>${allReviews.sanitationAvg}</span>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="food">
+                <h3>Food and Service Ratings</h3>
+                <ul>
+                    <li>
+                        Alcohol: <span>${allReviews.alcoholAvg}</span>
+                    </li>
+                    <li>
+                        Food Rating: <span>${allReviews.foodAvg}</span>
+                    </li>
+                    <li>
+                        Service Rating: <span>${allReviews.serviceAvg}</span>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="patio">
+                <h3>Patio Ratings</h3>
+                <ul>
+                    <li>
+                        Atmosphere: <span>${allReviews.atmosphereAvg}</span>
+                    </li>
+                    <li>
+                        Patio Space Rating: <span>${allReviews.patioAvg}</span>
+                    </li>
+                    <li>
+                        Pet Friendly: <span>${allReviews.petFriendlyAvg}</span>
+                    </li>
+                </ul>
+            </div>
         </div>
+            <a href="/"><button type="button" class="btn btn-outline-dark">Home</button></a>
+    </div>
+
     </body>
 </html>`
     res.send(reviewsHTML);
