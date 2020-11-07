@@ -10,8 +10,10 @@
   <link rel="stylesheet" href="../css/map-styles.css" />
 </head>
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Pandemic Patios</a>
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="images/pandemic-patios-horizontal.png" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -24,7 +26,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav justify-content-end">
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -45,11 +47,12 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/businessform">Add a Restaurant</a>
+          <a class="nav-link" href="/businessform">Add a Patio</a>
         </li>
       </ul>
     </div>
   </nav>
+  
   <div class="pac-card" id="pac-card">
     <div>
         <div id="title">Find Patios by City</div>
@@ -89,6 +92,7 @@
 </div>
   <div id="restaurants-map"></div>
   <div id="footer">
+    <img id="logo" src="images/pandemic-patios-circle.png"/>
     <p id="copyright">
       Copyright &copy;
       <script>
