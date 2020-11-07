@@ -1,11 +1,14 @@
 body {
-    background-color: black;
+    background-color: slategray;
+    /* color: paleturquoise */
 }
 
 #container {
+    padding: 10vh 20vh 5vh 20vh;
+    background-image: linear-gradient(to bottom right, violet, paleturquoise);
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
     /* height: auto; */
@@ -21,10 +24,44 @@ body {
 
 #middle {
     background-color: silver;
-    height: 80vh;
+    height: 60vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-#bottom {
-    background-color: slategrey;
-    height: 5vh;
+#footer {
+    height:10vh;
+    padding: 10px;
+    background-color: #343b3f;
+    color: white;
+    text-align: center;
+  }
+
+#mid_left {
+    /* width: 50%; */
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    
+}
+
+#mid_right {
+    /* width: 25%; */
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    
+}
+
+.login_button {
+    height: 3.5vh;
+    margin-bottom:1vh;
+}
+
+#gh_button, #twit_button, #fb_button, #goog_button {
+    text-align: center;
+    vertical-align: middle;
 }

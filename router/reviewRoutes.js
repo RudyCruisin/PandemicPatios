@@ -6,7 +6,7 @@ const fetch = require('node-fetch')
 
 
 function loggedIn(req, res, next) {
-
+    // console.log("i am here" + req.isAuthenticated())
     if(req.user){
         next()
     } else {
@@ -16,10 +16,10 @@ function loggedIn(req, res, next) {
 }
 
 
-
-
 //Sends every review back
 router.get('/all', async (req, res)=> {
+    // console.log(req.isAuthenticated())
+    console.log(req.user)
     const reviews = await db.Review.findAll();
     res.send(reviews);
 })

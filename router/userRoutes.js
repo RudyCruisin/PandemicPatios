@@ -18,5 +18,13 @@ router.get('/reviewUser/:authID/:strat', async (req, res)=> {
     res.send(user)
 })
 
+router.get('/status', (req, res) => {
+    console.log(req.isAuthenticated())
+    console.log(req.user)
+    console.log(req.session)
+    // console.log()
+    res.send(' i r dumb')
+})
+
 
 module.exports = router
