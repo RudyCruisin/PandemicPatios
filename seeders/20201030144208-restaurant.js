@@ -3,21 +3,21 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
   await queryInterface.bulkInsert('Restaurants', [{
-    name: 'TestSite',
-    city: 'TestCity',
-    state: 'TestState',
-    zipCode: '000001',
-    phoneNumber: '1234567890',
+    name: 'The Optimist',
+    city: 'Atlanta',
+    state: 'GA',
+    zipCode: '30318',
+    phoneNumber: '4044776260',
     createdAt: new Date(),
     updatedAt: new Date(),
-    streetNumber: '000000',
-    streetName: "testName"
+    streetNumber: '914',
+    streetName: "Howell Mill Rd",
+    lat: 33.7799858,
+    lng: -84.41072059999999
   }])
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('People', null, {
-      name: 'TestSite'
-    });
+    await queryInterface.bulkDelete('Restaurants', null, {});
   }
 };
