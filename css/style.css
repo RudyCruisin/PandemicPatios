@@ -1,0 +1,129 @@
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+       #restaurants-map { 
+        height: 95.5%; 
+        width: 100%;
+    }
+    
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+    height: 90%;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: darkslategray;
+    }
+    
+    #page-body {
+        padding: 40px 25px 25px 25px;
+    }
+    
+    #patioReview {
+        padding: 25px 0 0 0;
+    }
+    
+    .header {
+        height: 90px;
+    }
+    
+    #description {
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    }
+    
+    .pac-card, .weather-card, .covid-card {
+        margin: 10px 10px;
+        border-radius: 7px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+      }
+    
+    #pac-container, #weather-container, #covid-container {
+    padding-bottom: 12px;
+    margin-right: 12px;
+    }
+    
+    #pac-input {
+    border-radius: 3px;
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    margin-top: 10px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 250px;
+    }
+    
+    #remove-boundary-btn {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        margin-top: 10px;
+        padding: 0 11px 0 13px;
+        }
+    
+    #pac-input:focus {
+    border-color: #343b3f;
+    }
+    
+    #title, #weather-title, #covid-title {
+    border-radius: 7px 7px 0 0;
+    color: #EA4435;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 12px;
+    }
+    
+    #weather-container, #covid-container {
+        font-size: 14px;
+        padding: 6px 12px;
+        margin: 0;
+    }
+    
+    #location, #icon, #description, #temp, #humidity, #state, #cases, #hospitalizations, #deaths  {
+        font-size: 18px;
+        padding: 1px 10px;
+        margin: 0;
+    }
+    
+    #weather-icon {
+        height: 50px;
+        width: 50px;
+    }
+    
+    #target {
+    width: 345px;
+    }
+    
+    #footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        height: 15%;
+        padding: 10px;
+        background-color: #f8f9fa;
+        color: darkslategrey;
+        text-align: center;
+      }
+    
+    #logo {
+        width: 40px;
+        margin: 5px;
+    }
+      
+    #copyright {
+        font-size: 0.75em;
+      }
+      
