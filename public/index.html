@@ -7,9 +7,10 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous"
   />
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/map-styles.css" />
 </head>
 <body>
+<<<<<<< HEAD
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Pandemic Patios</a>
     
@@ -17,10 +18,54 @@
 
     <a id="logoutButton" class="navbar-brand" href="/logout" title="Logout">Logout</a>
 
+=======
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="images/pandemic-patios-horizontal.png" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav justify-content-end">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdownMenuLink"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Login
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/auth/github">Github</a>
+            <a class="dropdown-item" href="/auth/facebook">Facebook</a>
+            <a class="dropdown-item" href="/auth/google">Google</a>
+            <a class="dropdown-item" href="/auth/twitter">Twitter</a>
+            <a class="dropdown-item" href="/logout">Logout</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/businessform">Add a Patio</a>
+        </li>
+      </ul>
+    </div>
+>>>>>>> development
   </nav>
+  
   <div class="pac-card" id="pac-card">
     <div>
-        <div id="title">Find Patios by Location</div>
+        <div id="title">Find Patios by City</div>
     </div>
     <div id="pac-container">
         <input id="pac-input" type="text" placeholder="Where do you want to Patio..." />
@@ -57,6 +102,7 @@
 </div>
   <div id="restaurants-map"></div>
   <div id="footer">
+    <img id="logo" src="images/pandemic-patios-circle.png"/>
     <p id="copyright">
       Copyright &copy;
       <script>
