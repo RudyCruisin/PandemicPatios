@@ -1,26 +1,20 @@
-// window.onload = e => {
-//     console.log("page is loaded!")
-//     if (document.cookie.length > 0) {
-//         $("#loginButton").hide();
-//     }
-//     else {
-//         $("#logoutButton").hide();
-//     }
-// }
+window.onload = async e => {
+    console.log("page is loaded!")
 
-// function loggedIn(req, res, next) {
-//     // console.log("passport auth: " + req.isAuthenticated())
-//     // if (req.isAuthenticated()) {
-//     //     return next();
-//     // } else {
-//     //     res.redirect('/');
-//     // }
-// }
+    var userStatus = await fetchStatus("/user/status")
 
-// const express = require('express')
-// const passport = require('passport')
-// const app = express();
+    if (userStatus == false) {
+        $("#logoutButton").hide();
+        $("#patioButton").hide();
 
-// app.get("/", loggedIn, function(req,res,next) {
-//     console.log("req.user is here:" + req.isAuthenticated())
-// })
+    }
+    else if (userStatus == true) {
+        $("#loginButton").hide();
+    }
+}
+
+async function fetchStatus(url) {
+    let response = await fetch(url);
+    let data = await response.json()
+    return data;
+}

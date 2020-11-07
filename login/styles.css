@@ -13,8 +13,7 @@ body {
     margin-right: auto;
     /* height: auto; */
     margin-top: 5vh;
-    margin-bottom: 5vh;
-    
+    margin-bottom: 5vh;    
 }
 
 #top {
@@ -56,8 +55,17 @@ body {
     
 }
 
+.ppLogo{
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    min-width: 10px;
+}
+
 .login_button {
-    height: 3.5vh;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
     margin-bottom:1vh;
 }
 

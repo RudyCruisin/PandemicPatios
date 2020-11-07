@@ -43,19 +43,19 @@ app.use('/businessform', express.static(__dirname + '/businessform'))
 app.use('/login', express.static(__dirname + '/login'))
 
 // -----------------------------------------------
-//             LOADING PASSPORT
+//             LOADING PASSPORT...
 // -----------------------------------------------
 
 app.use(passport.initialize())
 app.use(passport.session())
 
 passport.serializeUser(function (user, done) {
-    console.log(user)
+    // console.log("from server.js" + user)
     done(null, user);
 })
 
 passport.deserializeUser(function (id, done) {
-    console.log(id)
+    // console.log(id)
     done(null, id);
 })
 
@@ -82,7 +82,7 @@ app.listen(process.env.PORT, () => {
 // db.sequelize.authenticate().then(()=>{ 
 //        console.log("Great Success!")
 //        db.sequelize.sync()
-//        db.Review.sync({ alter: true })
+//        db.Reviews.sync({ alter: true })
 //        db.Restaurant.sync({ alter: true})
 //        db.User.sync({ alter: true })
 //  })

@@ -8,6 +8,8 @@ var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 const router = express.Router()
 
+router.use(bodyParser.json())
+
 //Setting up Google Stategy with passport
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
@@ -41,19 +43,6 @@ passport.use(new GoogleStrategy({
     done(null, profile);
   }
 ));
-
-router.use(bodyParser.json())
-
-router.use(passport.initialize())
-router.use(passport.session())
-
-passport.serializeUser(function (user, done) {
-  done(null, user);
-})
-
-passport.deserializeUser(function (id, done) {
-  done(null, id);
-})
 
 router.get('/',
   passport.authenticate('google', {

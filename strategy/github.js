@@ -50,7 +50,7 @@ passport.use(new GitHubStrategy({
 ));
 
 router.get('/callback',
-    passport.authenticate('github', { failureRedirect: '/' }),
+    passport.authenticate('github', { failureRedirect: '/login' }),
     (req, res) => {
         res.redirect('/')
     })

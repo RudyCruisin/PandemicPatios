@@ -50,17 +50,6 @@ passport.use(new TwitterStrategy({
     }
 ));
 
-router.use(passport.initialize())
-router.use(passport.session())
-
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (obj, done) {
-    done(null, obj);
-});
-
 router.get('/',
     passport.authenticate('twitter'))
 
