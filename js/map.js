@@ -64,7 +64,7 @@ function renderMarkers(restaurants, map) {
             content: `<h6>${marker.restaurantName}</h6>
             <p>Phone Number:${marker.restaurantPhone}</p>
             <a href="/review/restaurant/reviews/${marker.restaurantId}">See Reviews</a>
-            <a href="../form">Review ${marker.restaurantName}</a>`
+            `
         });
 
         // ADDS CLICK EVENT LISTENER TO MARKER
