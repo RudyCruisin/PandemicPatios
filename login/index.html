@@ -1,51 +1,86 @@
 <!DOCTYPE html>
 <head>
-    <title>Login - Pandemic Patios</title>
-    <link
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-3KBD0XBKMF"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-3KBD0XBKMF");
+  </script>
+  <title>Login - Pandemic Patios</title>
+  <link
     rel="stylesheet"
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous"
   />
-    <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div id = "container">
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <a class="navbar-brand" href="/">Pandemic Patios</a>   
-          </nav>
-        <div id = "middle">
-            <div id = "mid_left">
-                <img class="ppLogo" src= "images/pandemic-patios-circle.png" />
-            </div>
-            <div id = "mid_right">
-                <p>Login to utilize Pandemic Patios!</p>
-                <div id = "gh_button">
-                  <input type = "image" id = "ghLogin" src="images/Octocat.png" alt="Github login" class="login_button"></input>
-                </div>
-                <div id = "fb_button">
-                  <input type = "image" src="images/facebookLogin.png" alt="Facebook login" class="login_button"></input>
-                </div>
-                <div id = "twit_button">
-                  <input type = "image" src="images/twitterLogin.png" alt="Twitter login" class="login_button"></input>
-                </div>
-                <div id = "goog_button">
-                  <input type = "image" src="images/googleLogin.png" alt="Google login" class="login_button"></input>
-                </div>
-            </div>
+  <div id="container">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Pandemic Patios</a>
+    </nav>
+    <div id="middle">
+      <div id="mid_left">
+        <img class="ppLogo" src="images/pandemic-patios-circle.png" />
+      </div>
+      <div id="mid_right">
+        <p>Login to utilize Pandemic Patios!</p>
+        <div id="gh_button">
+          <input
+            type="image"
+            id="ghLogin"
+            src="images/Octocat.png"
+            alt="Github login"
+            class="login_button"
+          />
         </div>
-        <div id="footer">
-            <p id="copyright">
-              Copyright &copy;
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              <br />
-              Pandemic Patios
-            </p>
-          </div>
+        <div id="fb_button">
+          <input
+            type="image"
+            src="images/facebookLogin.png"
+            alt="Facebook login"
+            class="login_button"
+          />
+        </div>
+        <div id="twit_button">
+          <input
+            type="image"
+            src="images/twitterLogin.png"
+            alt="Twitter login"
+            class="login_button"
+          />
+        </div>
+        <div id="goog_button">
+          <input
+            type="image"
+            src="images/googleLogin.png"
+            alt="Google login"
+            class="login_button"
+          />
+        </div>
+      </div>
     </div>
-    <script
+    <div id="footer">
+      <p id="copyright">
+        Copyright &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        <br />
+        Pandemic Patios
+      </p>
+    </div>
+  </div>
+  <script
     src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"
@@ -57,4 +92,3 @@
   ></script>
   <script src="../js/login.js"></script>
 </body>
-

@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-3KBD0XBKMF"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-3KBD0XBKMF");
+  </script>
   <title>PANDEMIC PATIOS</title>
   <link
     rel="stylesheet"
@@ -15,48 +29,71 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav justify-content-end">
         <li class="nav-item">
-          <a id="loginButton" class="nav-link" href="/login/index.html" title="Go to Login Page">Login</a>
+          <a
+            id="loginButton"
+            class="nav-link"
+            href="/login/index.html"
+            title="Go to Login Page"
+            >Login</a
+          >
         </li>
         <li class="nav-item">
-          <a id="logoutButton" class="nav-link" href="/logout" title="Logout">Logout</a>
+          <a id="logoutButton" class="nav-link" href="/logout" title="Logout"
+            >Logout</a
+          >
         </li>
         <li class="nav-item">
-          <a id="patioButton" class="nav-link" href="/businessform">Add a Patio</a>
+          <a id="patioButton" class="nav-link" href="/businessform"
+            >Add a Patio</a
+          >
         </li>
       </ul>
     </div>
-
   </nav>
-  
+
   <div class="pac-card" id="pac-card">
     <div>
-        <div id="title">Find Patios by City</div>
+      <div id="title">Find Patios by City</div>
     </div>
     <div id="pac-container">
-        <input id="pac-input" type="text" placeholder="Where do you want to Patio..." />
-        <br />
-        <div>
-            <input type="checkbox" id="remove-boundary-btn" name="remove-boundary-btn"
-                   checked="true">
-            <label for="remove-boundary-btn">Remove Boundary</label>
-        </div>
+      <input
+        id="pac-input"
+        type="text"
+        placeholder="Where do you want to Patio..."
+      />
+      <br />
+      <div>
+        <input
+          type="checkbox"
+          id="remove-boundary-btn"
+          name="remove-boundary-btn"
+          checked="true"
+        />
+        <label for="remove-boundary-btn">Remove Boundary</label>
+      </div>
     </div>
   </div>
   <div class="weather-card" id="weather-card">
-      <div>
-          <div id="weather-title">Current Weather</div>
+    <div>
+      <div id="weather-title">Current Weather</div>
+    </div>
+    <div id="weather-container">
+      <h4 id="location"></h4>
+      <div id="icon">
+        <img
+          id="weather-icon"
+          src="../images/weatherplaceholdericon.png"
+          alt="Weather icon"
+        />
       </div>
-      <div id="weather-container">
-        <h4 id="location"></h4>
-        <div id="icon"><img id="weather-icon" src="../images/weatherplaceholdericon.png" alt="Weather icon"></div>
-        <h4 id="description"></h4>
-        <h4 id="temp"></h4>
-        <h4 id="humidity"></h4>
-      </div>
+      <h4 id="description"></h4>
+      <h4 id="temp"></h4>
+      <h4 id="humidity"></h4>
+    </div>
   </div>
   <div class="covid-card" id="covid-card">
     <div>
-        <div id="covid-title">COVID-19 Data</div>
+      <div id="covid-title">COVID-19 Data</div>
     </div>
     <div id="covid-container">
       <h4 id="state"></h4>
@@ -64,10 +101,10 @@
       <h4 id="hospitalizations"></h4>
       <h4 id="deaths"></h4>
     </div>
-</div>
+  </div>
   <div id="restaurants-map"></div>
   <div id="footer">
-    <img id="logo" src="images/pandemic-patios-circle.png"/>
+    <img id="logo" src="images/pandemic-patios-circle.png" />
     <p id="copyright">
       Copyright &copy;
       <script>
@@ -78,7 +115,10 @@
     </p>
   </div>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDylyELTw5HP6i0KIEp7jyIWTva_SdH2IQ&callback=runApp&libraries=places&geometry&v=weekly" defer></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDylyELTw5HP6i0KIEp7jyIWTva_SdH2IQ&callback=runApp&libraries=places&geometry&v=weekly"
+    defer
+  ></script>
   <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
