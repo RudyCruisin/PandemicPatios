@@ -73,6 +73,12 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
         text-align: center;
         font-size: 40;
     }
+
+    .review-total {
+        position: relative;
+        text-align: center;
+        font-size: 20;
+    }
     
     .container a{
         align-self: center;
@@ -102,6 +108,7 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
     <body>
     <div class="container">
             <h1 class="name">Name of Restaurant</h1>
+            <h4 class="review-total">${allReviews.total} Reviews</h4>
             <a href="/form"><button type="button" class="btn btn-outline-success">Add your Review</button></a>
         <div class="reviews">
             <div class="covid">
@@ -149,7 +156,6 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
                 </ul>
             </div>
         </div>
-            <a href="/"><button type="button" class="btn btn-outline-dark">Home</button></a>
     </div>
 
     </body>
@@ -215,7 +221,8 @@ async function avgReviews(resID) {
     }
 
     // Find the average of each
-    let avgRestReviews = {
+    let avgRestReviews = { 
+        total: revLength,
         maskAvg : Math.round((maskTotal / revLength) * 10) / 10,
         socialDistancingAvg : Math.round((socialDistancingTotal / revLength) * 10) / 10,
         sanitationAvg : Math.round((sanitationTotal / revLength) * 10) / 10,
