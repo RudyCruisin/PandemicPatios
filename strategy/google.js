@@ -8,10 +8,7 @@ var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 const router = express.Router()
 
-router.use(session({
-  secret: 'twitPatio',
-  maxAge: (24 * 60 * 60 * 1000)
-}))
+router.use(bodyParser.json())
 
 //Setting up Google Stategy with passport
 passport.use(new GoogleStrategy({
@@ -22,7 +19,6 @@ passport.use(new GoogleStrategy({
 },
   async function (request, accessToken, refreshToken, profile, done) {
     console.log(("Google Login Successful"));
-    console.log(profile)
     let user = await db.User.findOne(
       {
         where: {
@@ -48,35 +44,17 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-router.use(bodyParser.json())
-
-router.use(passport.initialize())
-router.use(passport.session())
-
-passport.serializeUser(function (user, done) {
-  done(null, user);
-})
-
-passport.deserializeUser(function (id, done) {
-  done(null, id);
-})
-
-router.get('/auth/google',
+router.get('/',
   passport.authenticate('google', {
     scope:
       ['email', 'profile']
   }
   ));
 
-router.get('/auth/google/callback',
+router.get('/callback',
   passport.authenticate('google', {
     successRedirect: '/',
-    failureRedirect: '/'
+    failureRedirect: '/login'
   }));
-
-router.get('/logout', (req, res) => {
-  req.logout()
-  res.redirect('/')
-})
 
 module.exports = router

@@ -6,7 +6,6 @@ const fetch = require('node-fetch')
 
 
 function loggedIn(req, res, next) {
-
     if(req.user){
         next()
     } else {
@@ -16,10 +15,9 @@ function loggedIn(req, res, next) {
 }
 
 
-
-
 //Sends every review back
 router.get('/all', async (req, res)=> {
+    console.log(req.user)
     const reviews = await db.Review.findAll();
     res.send(reviews);
 })
