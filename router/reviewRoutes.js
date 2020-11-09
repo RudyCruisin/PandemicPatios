@@ -40,74 +40,12 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
     reviewsHTML = `<html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
-    <style>
-    .container {
-        font-family: Impact, Charcoal, sans-serif;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding: 0;
-        margin-top: 10px;
-    }
-    
-    .container ul {
-        list-style-type: none;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20;
-        text-align: center;
-    }
-    
-    .container li {
-        display: inline;
-        margin: 10px;
-    }
-    
-    .container li > span {
-        font-weight: bold;
-        color: blue;
-    }
-    
-    .name {
-        position: relative;
-        text-align: center;
-        font-size: 40;
-    }
+        <link rel="stylesheet" href="/review.css">
+        </head>
 
-    .review-total {
-        position: relative;
-        text-align: center;
-        font-size: 20;
-    }
-    
-    .container a{
-        align-self: center;
-    }
-    
-    .covid h3 {
-        color: red;
-    }
-    
-    .food h3 {
-        color: darkgreen;
-    }
-    
-    .patio h3 {
-        color: orange
-    }
-    
-    .container h3 {
-        position: relative;
-        text-align: center;
-        font-size: 30;
-    }
-    .reviews div {
-        margin: 50px
-    }
-    </style>
     <body>
     <div class="container">
-            <h1 class="name">Name of Restaurant</h1>
+            <h1 class="name">${allReviews.name}</h1>
             <h4 class="review-total">${allReviews.total} Reviews</h4>
             <a href="/form"><button type="button" class="btn btn-outline-success">Add your Review</button></a>
         <div class="reviews">
@@ -163,7 +101,24 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
     res.send(reviewsHTML);
 })
 
+async function getRestName(resID) {
+    //GET THE RESTAURANT INFO
+    var restaurant = await fetch(`http://localhost:9000/restaurant/getRestaurant/${resID}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+            },
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+    })
+
+    restaurant = await restaurant.json();
+    return restaurant[0].name
+}
+
 async function avgReviews(resID) {
+    //GET ALL THE REVIEWS FOR A GIVEN RESTAURANT
     var restReviews = await fetch(`http://localhost:9000/review/restaurant/${resID}`, {
         method: 'GET',
         headers: {
@@ -174,9 +129,12 @@ async function avgReviews(resID) {
         credentials: 'same-origin', // include, *same-origin, omit
     })
 
-    restReviews = await restReviews.json()
+    restReviews = await restReviews.json();
 
     let revLength = restReviews.length;
+    let restName = await getRestName(resID);
+    console.log("inside avgReviews()", restName);
+
     // Creating the variables to make averages for each category
     let maskTotal = 0;
     let socialDistancingTotal = 0;
@@ -222,6 +180,7 @@ async function avgReviews(resID) {
 
     // Find the average of each
     let avgRestReviews = { 
+        name: restName,
         total: revLength,
         maskAvg : Math.round((maskTotal / revLength) * 10) / 10,
         socialDistancingAvg : Math.round((socialDistancingTotal / revLength) * 10) / 10,
