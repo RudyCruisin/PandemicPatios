@@ -77,7 +77,7 @@ const handleSubmit = e => {
   const data = new FormData(e.target);
   const stringified = stringifyFormData(data)
   sendBusiness(stringified);
-  window.location.assign("/");
+  window.close();
 }
 
 const form = document.getElementById('businessForm')
