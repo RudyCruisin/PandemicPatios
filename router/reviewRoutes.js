@@ -38,67 +38,88 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
     let allReviews = await avgReviews(resID);
     console.log("this is allReviews from the router", allReviews);
     reviewsHTML = `<html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="/review.css">
-        </head>
+        <head>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="/review.css">
+            </head>
 
-    <body>
-    <div class="container">
-            <h1 class="name">${allReviews.name}</h1>
-            <h4 class="review-total">${allReviews.total} Reviews</h4>
-            <a href="/form"><button type="button" class="btn btn-outline-success">Add your Review</button></a>
-        <div class="reviews">
-            <div class="covid">
-                <h3>COVID-19 Ratings</h3>
-                <ul>
-                    <li>
-                        Mask Rating: <span>${allReviews.maskAvg}</span>
-                    </li>
-                    <li>
-                        Social Distancing Rating: <span>${allReviews.socialDistancingAvg}</span>
-                    </li>
-                    <li>
-                        Sanitation Rating: <span>${allReviews.sanitationAvg}</span>
-                    </li>
-                </ul>
-            </div>
-            <hr>
-            <div class="food">
-                <h3>Food and Service Ratings</h3>
-                <ul>
-                    <li>
-                        Alcohol: <span>${allReviews.alcoholAvg}</span>
-                    </li>
-                    <li>
-                        Food Rating: <span>${allReviews.foodAvg}</span>
-                    </li>
-                    <li>
-                        Service Rating: <span>${allReviews.serviceAvg}</span>
-                    </li>
-                </ul>
-            </div>
-            <hr>
-            <div class="patio">
-                <h3>Patio Ratings</h3>
-                <ul>
-                    <li>
-                        Atmosphere: <span>${allReviews.atmosphereAvg}</span>
-                    </li>
-                    <li>
-                        Patio Space Rating: <span>${allReviews.patioAvg}</span>
-                    </li>
-                    <li>
-                        Pet Friendly: <span>${allReviews.petFriendlyAvg}</span>
-                    </li>
-                </ul>
+        <body>
+        <div class="container">
+                <h1 class="name">${allReviews.name}</h1>
+                <h4 class="review-total">${allReviews.total} Reviews</h4>
+                <a href="/form"><button type="button" class="btn btn-outline-success">Add your Review</button></a>
+            <div class="reviews">
+                <div class="covid">
+                    <h3>COVID-19 Ratings</h3>
+                    <ul>
+                        <li>
+                            Mask Rating: <span>${allReviews.maskAvg}</span>
+                        </li>
+                        <li>
+                            Social Distancing Rating: <span>${allReviews.socialDistancingAvg}</span>
+                        </li>
+                        <li>
+                            Sanitation Rating: <span>${allReviews.sanitationAvg}</span>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="food">
+                    <h3>Food and Service Ratings</h3>
+                    <ul>
+                        <li>
+                            Alcohol: <span>${allReviews.alcoholAvg}</span>
+                        </li>
+                        <li>
+                            Food Rating: <span>${allReviews.foodAvg}</span>
+                        </li>
+                        <li>
+                            Service Rating: <span>${allReviews.serviceAvg}</span>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="patio">
+                    <h3>Patio Ratings</h3>
+                    <ul>
+                        <li>
+                            Atmosphere: <span>${allReviews.atmosphereAvg}</span>
+                        </li>
+                        <li>
+                            Patio Space Rating: <span>${allReviews.patioAvg}</span>
+                        </li>
+                        <li>
+                            Pet Friendly: <span>${allReviews.petFriendlyAvg}</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
-    </body>
-</html>`
+        </body>
+    </html>`
+
+    noReviewsHTML = `<html>
+        <head>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="/review.css">
+            </head>
+
+        <body>
+        <div class="container">
+                <h1 class="name">${allReviews.name}</h1>
+                <h4 class="review-total">There are no reviews yet.</h4>
+                <a href="/form"><button type="button" class="btn btn-outline-success">Add your Review</button></a>
+            <div class="reviews">
+                <div class="covid">
+        </body>
+    </html>`
+
+    if(allReviews.total === 0){
+        res.send(noReviewsHTML);
+    } else {
     res.send(reviewsHTML);
+    }
 })
 
 async function getRestName(resID) {
