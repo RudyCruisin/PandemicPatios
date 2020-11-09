@@ -31,155 +31,139 @@ router.get('/restaurant/:resID', async (req, res)=> {
     res.send(resRev);
 })
 
-// Sends averages from all reviews for a specific restaurant
+// Sends averages from all reviews for a specific restaurant and opens in a new tab as html
 router.get('/restaurant/reviews/:resID', async (req, res) => {
     const resID = req.params.resID;
     let allReviews = await avgReviews(resID);
     console.log("this is allReviews from the router", allReviews);
     reviewsHTML = `<html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
-    <style>
-    .container {
-        font-family: Impact, Charcoal, sans-serif;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding: 0;
-        margin-top: 10px;
-    }
-    
-    .container ul {
-        list-style-type: none;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 20;
-        text-align: center;
-    }
-    
-    .container li {
-        display: inline;
-        margin: 10px;
-    }
-    
-    .container li > span {
-        font-weight: bold;
-        color: blue;
-    }
-    
-    .name {
-        position: relative;
-        text-align: center;
-        font-size: 40;
-    }
-    
-    .container a{
-        align-self: center;
-    }
-    
-    .covid h3 {
-        color: red;
-    }
-    
-    .food h3 {
-        color: darkgreen;
-    }
-    
-    .patio h3 {
-        color: orange
-    }
-    
-    .container h3 {
-        position: relative;
-        text-align: center;
-        font-size: 30;
-    }
-    .reviews div {
-        margin: 50px
-    }
-    </style>
-    <body>
-    <div class="container">
-            <h1 class="name">Name of Restaurant</h1>
-            <a href="/form"><button type="button" class="btn btn-outline-success">Add your Review</button></a>
-        <div class="reviews">
-            <div class="covid">
-                <h3>COVID-19 Ratings</h3>
-                <ul>
-                    <li>
-                        Mask Rating: <span>${allReviews.maskAvg}</span>
-                    </li>
-                    <li>
-                        Social Distancing Rating: <span>${allReviews.socialDistancingAvg}</span>
-                    </li>
-                    <li>
-                        Sanitation Rating: <span>${allReviews.sanitationAvg}</span>
-                    </li>
-                </ul>
-            </div>
-            <hr>
-            <div class="food">
-                <h3>Food and Service Ratings</h3>
-                <ul>
-                    <li>
-                        Alcohol: <span>${allReviews.alcoholAvg}</span>
-                    </li>
-                    <li>
-                        Food Rating: <span>${allReviews.foodAvg}</span>
-                    </li>
-                    <li>
-                        Service Rating: <span>${allReviews.serviceAvg}</span>
-                    </li>
-                </ul>
-            </div>
-            <hr>
-            <div class="patio">
-                <h3>Patio Ratings</h3>
-                <ul>
-                    <li>
-                        Atmosphere: <span>${allReviews.atmosphereAvg}</span>
-                    </li>
-                    <li>
-                        Patio Space Rating: <span>${allReviews.patioAvg}</span>
-                    </li>
-                    <li>
-                        Pet Friendly: <span>${allReviews.petFriendlyAvg}</span>
-                    </li>
-                </ul>
+        <head>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="/review.css">
+            </head>
+
+        <body>
+        <div class="container">
+                <h1 class="name">${allReviews.name}</h1>
+                <h4 class="review-total">${allReviews.total} Reviews</h4>
+                <a href="/form"><button type="button" class="btn btn-outline-success">Add your Review</button></a>
+            <div class="reviews">
+                <div class="covid">
+                    <h3>COVID-19 Ratings</h3>
+                    <ul>
+                        <li>
+                            Mask Rating: <span>${allReviews.maskAvg}</span>
+                        </li>
+                        <li>
+                            Social Distancing Rating: <span>${allReviews.socialDistancingAvg}</span>
+                        </li>
+                        <li>
+                            Sanitation Rating: <span>${allReviews.sanitationAvg}</span>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="food">
+                    <h3>Food and Service Ratings</h3>
+                    <ul>
+                        <li>
+                            Alcohol: <span>${allReviews.alcoholAvg}% Say Yes</span>
+                        </li>
+                        <li>
+                            Food Rating: <span>${allReviews.foodAvg}</span>
+                        </li>
+                        <li>
+                            Service Rating: <span>${allReviews.serviceAvg}</span>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="patio">
+                    <h3>Patio Ratings</h3>
+                    <ul>
+                        <li>
+                            Atmosphere: <span>${allReviews.atmosphereAvg}</span>
+                        </li>
+                        <li>
+                            Patio Space Rating: <span>${allReviews.patioAvg}</span>
+                        </li>
+                        <li>
+                            Pet Friendly: <span>${allReviews.petFriendlyAvg}% Say Yes</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-            <a href="/"><button type="button" class="btn btn-outline-dark">Home</button></a>
-    </div>
 
-    </body>
-</html>`
+        </body>
+    </html>`
+
+    noReviewsHTML = `<html>
+        <head>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="/review.css">
+            </head>
+
+        <body>
+        <div class="container">
+                <h1 class="name">${allReviews.name}</h1>
+                <h4 class="review-total">There are no reviews yet.</h4>
+                <a href="/form"><button type="button" class="btn btn-outline-success">Add your Review</button></a>
+            <div class="reviews">
+                <div class="covid">
+        </body>
+    </html>`
+
+    if(allReviews.total === 0){
+        res.send(noReviewsHTML);
+    } else {
     res.send(reviewsHTML);
+    }
 })
 
-async function avgReviews(resID) {
-    var restReviews = await fetch(`http://localhost:9000/review/restaurant/${resID}`, {
+async function getRestName(resID) {
+    //GET THE RESTAURANT INFO
+    var restaurant = await fetch(`http://localhost:9000/restaurant/getRestaurant/${resID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
-          },
+            },
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, *same-origin, omit
     })
 
-    restReviews = await restReviews.json()
+    restaurant = await restaurant.json();
+    return restaurant[0].name
+}
+
+async function avgReviews(resID) {
+    //GET ALL THE REVIEWS FOR A GIVEN RESTAURANT
+    var restReviews = await fetch(`http://localhost:9000/review/restaurant/${resID}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        mode: 'cors', 
+        cache: 'no-cache', 
+        credentials: 'same-origin', 
+    })
+
+    restReviews = await restReviews.json();
 
     let revLength = restReviews.length;
+    let restName = await getRestName(resID);
+
     // Creating the variables to make averages for each category
     let maskTotal = 0;
     let socialDistancingTotal = 0;
     let sanitationTotal = 0;
-    let alcoholTotal = {"Yes": 0, "No": 0};
+    let alcoholYes = 0;
     let foodTotal = 0;
     let serviceTotal = 0;
     let atmosphere = [];
     let patioTotal = 0;
-    let petFriendlyTotal = {"Yes": 0, "No": 0};
+    let petFriendlyYes = 0;
 
     // Goes through all the reviews and sums up each category total
     for(let i=0; i<revLength; i++) {
@@ -193,17 +177,11 @@ async function avgReviews(resID) {
 
         //keep track of the yes and no responses for alcohol and petfriendly
         if (restReviews[i].alcohol === "yes") {
-            alcoholTotal["Yes"] += 1
-        }
-        else {
-            alcoholTotal["No"] += 1
+            alcoholYes += 1
         }
 
         if (restReviews[i].petFriendly === "yes") {
-            petFriendlyTotal["Yes"] += 1
-        }
-        else {
-            petFriendlyTotal["No"] += 1
+            petFriendlyYes += 1
         }
 
         //only add an atmosphere response if it is not in the array already
@@ -214,20 +192,21 @@ async function avgReviews(resID) {
     }
 
     // Find the average of each
-    let avgRestReviews = {
+    let avgRestReviews = { 
+        name: restName,
+        total: revLength,
         maskAvg : Math.round((maskTotal / revLength) * 10) / 10,
         socialDistancingAvg : Math.round((socialDistancingTotal / revLength) * 10) / 10,
         sanitationAvg : Math.round((sanitationTotal / revLength) * 10) / 10,
-        alcoholAvg: JSON.stringify(alcoholTotal),
+        alcoholAvg: Math.round((alcoholYes / revLength) * 100),
         foodAvg : Math.round((foodTotal / revLength) * 10) / 10,
         serviceAvg : Math.round((serviceTotal / revLength) * 10) / 10,
         patioAvg : Math.round((patioTotal / revLength) * 10) / 10,
         atmosphereAvg: atmosphere,
-        petFriendlyAvg: JSON.stringify(petFriendlyTotal)
+        petFriendlyAvg: Math.round((petFriendlyYes / revLength) * 100)
 
     }
 
-    console.log(avgRestReviews)
     return avgRestReviews
 }
 
