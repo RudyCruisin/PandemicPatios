@@ -11,39 +11,49 @@ function getReviews(userId) {
     .catch(err => console.log(err))
 }
 
+// GET RESTAURANT NAME BY RestaurantId
+async function getRestaurantName(RestaurantId) {
+    let restName = await fetch(`/restaurant/getRestaurant/${RestaurantId}`);
+    let data = await restName.json()
+    return data[0].name;
+}
+
+// SHOW ALL REVIEWS FOR A USER
 async function showReviews() {
-// need to add userId as parameter, hardcode right now for testing
-let userReviews = await getReviews(6);
-console.log(userReviews);
+    // need to add userId as parameter, hardcode right now for testing
+    let userReviews = await getReviews(6);
+    console.log(userReviews);
 
-// declare html DOM variables
-let reviewContainer = document.getElementById("user-reviews-container");
-let review = document.createElement("div");
+    // declare html DOM variables
+    let reviewContainer = document.getElementById("user-reviews-container");
+    let review = document.createElement("div");
 
-// if user has no reviews, show that there are no reviews yet on their review page. 
-// if user has at least one review, show each review on their review page.
-if (userReviews.length === 0) {
-    review.innerHTML = `<div>You have no reviews yet!</div>
-    <a href="/">Start Reviewing Today</a>`;
+    // if user has no reviews, show that there are no reviews yet on their review page. 
+    // if user has at least one review, show each review on their review page.
+    if (userReviews.length === 0) {
+        review.innerHTML = `<div>You have no reviews yet!</div>
+        <a href="/">Start Reviewing Today</a>`;
     } else {
-        userReviews.forEach((currentReview) => {
+        for (let i=0; i<userReviews.length; i++) {
+            let restName = await getRestaurantName(userReviews[i].RestaurantId); //can't use forEach with await, so decided to use a for loop
             review.insertAdjacentHTML('afterbegin', `<div>
-                <ul> Restaurant Name: TBD
-                <li> Mask Rating: ${currentReview.maskRating} </li>
-                <li> Social Distancing Rating: ${currentReview.socialDistancingRating} </li>
-                <li> Sanitation Rating: ${currentReview.sanitationRating} </li>
-                <li> Alcohol: ${currentReview.alcohol} </li>
-                <li> Food Rating: ${currentReview.foodRating} </li>
-                <li> Service Rating: ${currentReview.serviceRating} </li>
-                <li> Atmosphere: ${currentReview.atmosphere} </li>
-                <li> Patio Space Rating: ${currentReview.patioSpaceRating} </li>
-                <li> Pet Friendly: ${currentReview.petFriendly} </li>
+                <ul> Restaurant Name: ${restName}
+                <li> Mask Rating: ${userReviews[i].maskRating} </li>
+                <li> Social Distancing Rating: ${userReviews[i].socialDistancingRating} </li>
+                <li> Sanitation Rating: ${userReviews[i].sanitationRating} </li>
+                <li> Alcohol: ${userReviews[i].alcohol} </li>
+                <li> Food Rating: ${userReviews[i].foodRating} </li>
+                <li> Service Rating: ${userReviews[i].serviceRating} </li>
+                <li> Atmosphere: ${userReviews[i].atmosphere} </li>
+                <li> Patio Space Rating: ${userReviews[i].patioSpaceRating} </li>
+                <li> Pet Friendly: ${userReviews[i].petFriendly} </li>
                 </ul>
                 <button class="deleteRevBtn" onclick="deleteReview()">Delete Review</button>
                 <button class="updateRevBtn" onclick="updateReview()">Update Review</button>
                 </div>`)
-        })
+        }
     }
+
     reviewContainer.append(review);
 }
 
