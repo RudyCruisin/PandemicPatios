@@ -16,13 +16,6 @@ router.get('/twithome', (req, res) => {
     })
 })
 
-router.use(session({
-    secret: 'twitPatio',
-    maxAge: (24 * 60 * 60 * 1000)
-}))
-
-
-
 //Setting up Twitter Stategy with passport
 passport.use(new TwitterStrategy({
     consumerKey: process.env.TWIT_ID,
@@ -31,7 +24,6 @@ passport.use(new TwitterStrategy({
 },
     async function (accessToken, refreshToken, profile, cb) {
         console.log("Twitter Login Successful")
-        console.log(profile)
         let user = await db.User.findOne(
             {
                 where: {
@@ -58,22 +50,11 @@ passport.use(new TwitterStrategy({
     }
 ));
 
-router.use(passport.initialize())
-router.use(passport.session())
-
-passport.serializeUser(function (user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function (obj, done) {
-    done(null, obj);
-});
-
-router.get('/auth/twitter',
+router.get('/',
     passport.authenticate('twitter'))
 
-router.get('/auth/twitter/callback',
-    passport.authenticate('twitter', { failureRedirect: '/' }),
+router.get('/callback',
+    passport.authenticate('twitter', { failureRedirect: '/login' }),
     (req, res) => {
         res.redirect('/')
     })

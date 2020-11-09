@@ -2,7 +2,6 @@ require('dotenv').config()
 const bodyParser = require('body-parser')
 const express = require('express')
 const passport = require('passport')
-const session = require('express-session')
 const db = require('../models')
 const GitHubStrategy = require('passport-github').Strategy
 
@@ -16,11 +15,6 @@ router.get("/home", (req, res) => {
     })
 })
 
-router.use(session({
-    secret: 'githubPatio',
-    maxAge: (24 * 60 * 60 * 1000)
-}))
-
 //Setting up Github Strategy with passport
 
 passport.use(new GitHubStrategy({
@@ -30,7 +24,6 @@ passport.use(new GitHubStrategy({
 },
     async function (accessToken, refreshToken, profile, cb) {
         console.log(("Github Login Successful"))
-        //console.log(profile)
         let user = await db.User.findOne(
             {
                 where: {
@@ -56,30 +49,14 @@ passport.use(new GitHubStrategy({
     }
 ));
 
-router.use(passport.initialize())
-router.use(passport.session())
-
-passport.serializeUser(function (user, done) {
-    done(null, user);
-})
-
-passport.deserializeUser(function (id, done) {
-    done(null, id);
-})
-
-router.get('/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: '/' }),
+router.get('/callback',
+    passport.authenticate('github', { failureRedirect: '/login' }),
     (req, res) => {
         res.redirect('/')
     })
 
-router.get('/auth/github',
+router.get('/',
     passport.authenticate('github'))
 
-router.get('/logout', (req, res) => {
-    req.logout()
-    res.redirect('/')
-    console.log('You are logged out.')
-})
 
 module.exports = router
