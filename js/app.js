@@ -6,6 +6,7 @@ window.onload = async e => {
     if (userStatus == false) {
         $("#logoutButton").hide();
         $("#patioButton").hide();
+        $("#userReviewsButton").hide();
 
     }
     else if (userStatus == true) {

@@ -14,7 +14,6 @@ function loggedIn(req, res, next) {
 
 }
 
-
 //Sends every review back
 router.get('/all', async (req, res)=> {
     console.log(req.user)
@@ -237,7 +236,7 @@ router.get('/user/:userID', async (req, res)=> {
     const userID = req.params.userID;
     const userRev = await db.Review.findAll({
         where: {
-            UserID: userID
+            UserId: userID
         }
     })
     res.send(userRev);
