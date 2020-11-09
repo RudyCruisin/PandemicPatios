@@ -68,7 +68,7 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
                     <h3>Food and Service Ratings</h3>
                     <ul>
                         <li>
-                            Alcohol: <span>${allReviews.alcoholAvg}</span>
+                            Alcohol: <span>${allReviews.alcoholAvg}% Say Yes</span>
                         </li>
                         <li>
                             Food Rating: <span>${allReviews.foodAvg}</span>
@@ -89,7 +89,7 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
                             Patio Space Rating: <span>${allReviews.patioAvg}</span>
                         </li>
                         <li>
-                            Pet Friendly: <span>${allReviews.petFriendlyAvg}</span>
+                            Pet Friendly: <span>${allReviews.petFriendlyAvg}% Say Yes</span>
                         </li>
                     </ul>
                 </div>
@@ -159,12 +159,12 @@ async function avgReviews(resID) {
     let maskTotal = 0;
     let socialDistancingTotal = 0;
     let sanitationTotal = 0;
-    let alcoholTotal = {"Yes": 0, "No": 0};
+    let alcoholYes = 0;
     let foodTotal = 0;
     let serviceTotal = 0;
     let atmosphere = [];
     let patioTotal = 0;
-    let petFriendlyTotal = {"Yes": 0, "No": 0};
+    let petFriendlyYes = 0;
 
     // Goes through all the reviews and sums up each category total
     for(let i=0; i<revLength; i++) {
@@ -178,17 +178,11 @@ async function avgReviews(resID) {
 
         //keep track of the yes and no responses for alcohol and petfriendly
         if (restReviews[i].alcohol === "yes") {
-            alcoholTotal["Yes"] += 1
-        }
-        else {
-            alcoholTotal["No"] += 1
+            alcoholYes += 1
         }
 
         if (restReviews[i].petFriendly === "yes") {
-            petFriendlyTotal["Yes"] += 1
-        }
-        else {
-            petFriendlyTotal["No"] += 1
+            petFriendlyYes += 1
         }
 
         //only add an atmosphere response if it is not in the array already
@@ -205,12 +199,12 @@ async function avgReviews(resID) {
         maskAvg : Math.round((maskTotal / revLength) * 10) / 10,
         socialDistancingAvg : Math.round((socialDistancingTotal / revLength) * 10) / 10,
         sanitationAvg : Math.round((sanitationTotal / revLength) * 10) / 10,
-        alcoholAvg: JSON.stringify(alcoholTotal),
+        alcoholAvg: Math.round((alcoholYes / revLength) * 100),
         foodAvg : Math.round((foodTotal / revLength) * 10) / 10,
         serviceAvg : Math.round((serviceTotal / revLength) * 10) / 10,
         patioAvg : Math.round((patioTotal / revLength) * 10) / 10,
         atmosphereAvg: atmosphere,
-        petFriendlyAvg: JSON.stringify(petFriendlyTotal)
+        petFriendlyAvg: Math.round((petFriendlyYes / revLength) * 100)
 
     }
 
