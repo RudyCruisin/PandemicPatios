@@ -10,13 +10,10 @@ const handleSubmit = e => {
     e.preventDefault();
     let restaurantId = localStorage.getItem("restaurantId");
     const data = new FormData(e.target);
-    console.log(data)
     data.append('RestaurantId', restaurantId);
-    const stringified = stringifyFormData(data)
-    sendReview(stringified)
-    window.location.assign("/")
-    console.log(stringified)
-
+    const stringified = stringifyFormData(data);
+    sendReview(stringified);
+    window.close();
 }
 
 //$("#form").on("submit", handleSubmit())

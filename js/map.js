@@ -63,7 +63,7 @@ function renderMarkers(restaurants, map) {
         let infowindow = new google.maps.InfoWindow({
             content: `<h6>${marker.restaurantName}</h6>
             <p>Phone Number:${marker.restaurantPhone}</p>
-            <a href="/review/restaurant/reviews/${marker.restaurantId}">See Reviews</a>
+            <a href="/review/restaurant/reviews/${marker.restaurantId}" target="_blank">See Reviews</a>
             `
         });
 
