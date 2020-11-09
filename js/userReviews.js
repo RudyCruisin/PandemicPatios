@@ -10,11 +10,6 @@ function getReviews(userId) {
     })
     .catch(err => console.log(err))
 }
-// async function getReviews(userId) {
-//     let allReviews = await fetch(`/review/user/${userId}`)
-//     allReviews = await allReviews.json() 
-//     return allReviews;
-// }
 
 async function showReviews() {
 // need to add userId as parameter, hardcode right now for testing
@@ -44,8 +39,8 @@ if (userReviews.length === 0) {
                 <li> Patio Space Rating: ${currentReview.patioSpaceRating} </li>
                 <li> Pet Friendly: ${currentReview.petFriendly} </li>
                 </ul>
-                <button class="deleteRevBtn">Delete Review</button>
-                <button class="updateRevBtn">Update Review</button>
+                <button class="deleteRevBtn" onclick="deleteReview()">Delete Review</button>
+                <button class="updateRevBtn" onclick="updateReview()">Update Review</button>
                 </div>`)
         })
     }
@@ -55,11 +50,13 @@ if (userReviews.length === 0) {
 showReviews();
 
 // NEED TO ADD DELETE AND UPDATE REVIEW FUNCTIONS AND ADD TO ONCLICK
-// function deleteReview() {
+function deleteReview(revId) {
+    // calls delete route and deletes review from db
+    alert("This functionality is coming soon...")
+}
 
-// }
-
-// function updateReview() {
-
-// }
+function updateReview(revId) {
+    // calls update route and allows user to update review record from db
+    alert("This functionality is coming soon...")
+}
 
