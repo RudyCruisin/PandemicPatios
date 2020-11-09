@@ -32,7 +32,7 @@ router.get('/restaurant/:resID', async (req, res)=> {
     res.send(resRev);
 })
 
-// Sends averages from all reviews for a specific restaurant
+// Sends averages from all reviews for a specific restaurant and opens in a new tab as html
 router.get('/restaurant/reviews/:resID', async (req, res) => {
     const resID = req.params.resID;
     let allReviews = await avgReviews(resID);
@@ -145,16 +145,15 @@ async function avgReviews(resID) {
         headers: {
             'Content-Type': 'application/json'
           },
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
+        mode: 'cors', 
+        cache: 'no-cache', 
+        credentials: 'same-origin', 
     })
 
     restReviews = await restReviews.json();
 
     let revLength = restReviews.length;
     let restName = await getRestName(resID);
-    console.log("inside avgReviews()", restName);
 
     // Creating the variables to make averages for each category
     let maskTotal = 0;
@@ -215,7 +214,6 @@ async function avgReviews(resID) {
 
     }
 
-    console.log(avgRestReviews)
     return avgRestReviews
 }
 
