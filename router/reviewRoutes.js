@@ -2,21 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 const fetch = require('node-fetch')
-var LocalStorage = require('node-localstorage').LocalStorage,
- localStorage = new LocalStorage('./scratch');
-
- const asyncLocalStorage = {
-    setItem: function (key, value) {
-        return Promise.resolve().then(function () {
-            localStorage.setItem(key, value);
-        });
-    },
-    getItem: function (key) {
-        return Promise.resolve().then(function () {
-            return localStorage.getItem(key);
-        });
-    }
-};
+require('dotenv').config();
 
 async function loggedIn(req, res, next) {
     let strat;
@@ -158,7 +144,7 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
 
 async function getRestName(resID) {
     //GET THE RESTAURANT INFO
-    var restaurant = await fetch(`http://localhost:9000/restaurant/getRestaurant/${resID}`, {
+    var restaurant = await fetch(`${process.env.HOST}/restaurant/getRestaurant/${resID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -174,7 +160,7 @@ async function getRestName(resID) {
 
 async function avgReviews(resID) {
     //GET ALL THE REVIEWS FOR A GIVEN RESTAURANT
-    var restReviews = await fetch(`http://localhost:9000/review/restaurant/${resID}`, {
+    var restReviews = await fetch(`${process.env.HOST}/review/restaurant/${resID}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -325,7 +311,7 @@ router.patch('/update/:id', async (req, res)=> {
 //returns ID field of user when passed an authID
 const getAuthID = async (id, strat)=> {
 
-    var user = await fetch(`http://localhost:9000/user/reviewUser/${id}/${strat}`, {
+    var user = await fetch(`${process.env.HOST}/user/reviewUser/${id}/${strat}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
