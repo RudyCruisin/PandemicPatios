@@ -23,7 +23,6 @@ passport.use(new TwitterStrategy({
     callbackURL: process.env.TWIT_CALLBACK,
 },
     async function (accessToken, refreshToken, profile, cb) {
-        console.log("Twitter Login Successful")
         let user = await db.User.findOne(
             {
                 where: {

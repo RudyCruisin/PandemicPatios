@@ -23,7 +23,6 @@ passport.use(new FacebookStrategy({
     callbackURL: process.env.FB_CALLBACK,
 },
     async function (accessToken, refreshToken, profile, cb) {
-        console.log(("Facebook Login Successful"))
         let user = await db.User.findOne(
             {
                 where: {

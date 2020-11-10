@@ -44,7 +44,7 @@ let restaurantMarkers = [];
 
 // RENDER FUNCTION FOR RESTAURANT MARKERS
 function renderMarkers(restaurants, map) {
-    console.log("you are in renderMarkers", restaurants);
+    
     restaurants.forEach((currentRestaurant) => {
 
         // CREATES A MARKER
@@ -90,7 +90,6 @@ function renderMarkersInBoundary(restaurants, boundaryCir, map) {
     // A NEW ARRAY FOR ONLY THE MARKERS WITHIN THE BOUNDARY
     let restaurantsInBoundary = [];
 
-    console.log("you are in renderMarkersInBoundary", restaurants);
     // GETS LAT/LONGS OF CURRENT RESTAURANT & BOUNDARY CENTER & THEN USES GEOMETRY LIBRARY TO FIND THE DISTANCE BETWEEN
     restaurants.forEach((currentRestaurant) => {
         let marker_lat_lng = new google.maps.LatLng(currentRestaurant.lat, currentRestaurant.lng);
@@ -211,7 +210,7 @@ async function runApp() {
     //   getWeather(place);
 
 
-      // LINK UP COVID DATA
+      // LINK UP COVID DATA 
       getCovidData(place);
 
     });
