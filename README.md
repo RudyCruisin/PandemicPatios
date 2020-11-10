@@ -14,7 +14,11 @@ We are a COVID-era, yelp-style review site for outdoor dining. We provide our us
 
 ---
 
-## Code Snippets
+## Code Highlights
+
+Using Google Autocomplete to Add a Restaurant Address
+![Google Autocomplete](https://user-images.githubusercontent.com/67700253/98744869-77f0fc00-2380-11eb-8561-18d2a108e644.png)
+![Google Autocomplete2](https://user-images.githubusercontent.com/67700253/98744839-67408600-2380-11eb-9bf1-27f120c31722.png)
 
 ---
 
@@ -25,9 +29,30 @@ We are a COVID-era, yelp-style review site for outdoor dining. We provide our us
 * Use the package manager [npm](https://www.npmjs.com/get-npm) to run `npm install` in the project directory.
 * Create a `.env` file in the root of the project. The following variables are required:
     * `PORT`: Port where the backend server will run; use 9000 for local development
-    * `TBD` 
-* Create a `preview.js` file in the js folder of the project and add the following code:
-    * `const OW_API_KEY = <your-OpenWeather-key>` : API Key to [OpenWeather API](https://openweathermap.org/api)
+    * `DB_USER`: Local user
+    * `DB_PASS` : Local user password
+    * `DB_NAME` : Local database, use pandemicpatios_dev 
+    * `DB_HOST` : Local hosting platform, use localhost
+    * `HOST` : Local hosting url, use http://localhost:9000 for local testing
+    * Various Passport.js Credentials for Given Strategies : [Github](http://www.passportjs.org/packages/passport-github/), [Facebook](http://www.passportjs.org/packages/passport-facebook/), [Google](http://www.passportjs.org/packages/passport-google-oauth2/), [Twitter](http://www.passportjs.org/packages/passport-twitter/).
+      - `GH_ID` 
+      - `GH_SECRET`
+      - `GH_CALLBACK`
+      - `FB_ID`
+      - `FB_SECRET`
+      - `FB_CALLBACK`
+      - `GOOGLE__CLIENT_ID`
+      - `GOOGLE_CLIENT_SECRET`
+      - `GOOGLE_CALLBACK`
+      - `TWIT_ID`
+      - `TWIT_SECRET`
+      - `TWIT_CALLBACK`
+    * Authentication IDs by Strategy for table relations
+      - `TWIT_DBID=1`
+      - `FB_DBID=2`
+      - `GOOG_DBID=3`
+      - `GH_DBID=4`
+         
 * Run `npm start` to start the server.
 * Visit `http://localhost:9000`.
 
@@ -37,8 +62,10 @@ We are a COVID-era, yelp-style review site for outdoor dining. We provide our us
 
 * Express.js
 * Passport.js
+* Sequelize
 * PostgreSQL
 * Node.js
+* Node Fetch
 * Javascript
 * HTML
 * CSS
@@ -49,7 +76,6 @@ We are a COVID-era, yelp-style review site for outdoor dining. We provide our us
 
 * [Google Maps Javascript API](https://developers.google.com/maps/documentation/javascript/overview)
 * [Google Places API](https://developers.google.com/places/web-service/overview)
-* [Open Weather Map API](https://openweathermap.org/api)
 * [The Covid Tracking Project Data API](https://covidtracking.com/data/api)
 
 ---
