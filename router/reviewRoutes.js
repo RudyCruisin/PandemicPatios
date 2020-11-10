@@ -17,7 +17,6 @@ function loggedIn(req, res, next) {
 
 //Sends every review back
 router.get('/all', async (req, res)=> {
-    console.log(req.user)
     const reviews = await db.Review.findAll();
     res.send(reviews);
 })
@@ -232,8 +231,9 @@ router.delete('/:id', async (req, res)=> {
     res.send(deletedReview)
 })
 
-router.post('/add', loggedIn,  async (req, res)=> {
+router.post('/add',  async (req, res)=> {
     console.log(req.user.provider)
+    console.log("POST!!!!")
     //gets logged in user's authID
 
 
@@ -256,7 +256,6 @@ router.post('/add', loggedIn,  async (req, res)=> {
     }
 
     const authId = await getAuthID(UserId, strat)
-    console.log(authId)
     const { maskRating, socialDistancingRating, sanitationRating, alcohol, foodRating, serviceRating, atmosphere, patioSpaceRating, petFriendly, RestaurantId } = req.body
 
     const newReview = await db.Review.create({

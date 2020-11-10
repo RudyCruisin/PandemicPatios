@@ -23,7 +23,7 @@ form.addEventListener('submit', handleSubmit)
 
 
 const sendReview = async (review, RestaurantId)=> {
-    await fetch ('/review/add', {
+    await fetch ('http://localhost:9000/review/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

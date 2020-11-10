@@ -18,7 +18,6 @@ passport.use(new GoogleStrategy({
   passReqToCallback: true
 },
   async function (request, accessToken, refreshToken, profile, done) {
-    console.log(("Google Login Successful"));
     let user = await db.User.findOne(
       {
         where: {
