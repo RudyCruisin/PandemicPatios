@@ -60,12 +60,19 @@ async function showReviews() {
 showReviews();
 
 // NEED TO ADD DELETE AND UPDATE REVIEW FUNCTIONS AND ADD TO ONCLICK
-function deleteReview(revId) {
+async function deleteReview(revId) {
     // calls delete route and deletes review from db
     alert("This functionality is coming soon...")
 }
 
-function updateReview(revId) {
+async function deleteTask(todoId) {
+    await fetch(`./api/todos/${todoId}`, { 
+        method: 'DELETE'
+        }).catch( err => console.error(err))
+    await getTodos()
+}
+
+async function updateReview(revId) {
     // calls update route and allows user to update review record from db
     alert("This functionality is coming soon...")
 }
