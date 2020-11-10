@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+const fetch = require('node-fetch');
 const { route } = require('../strategy/google');
 
 
@@ -51,6 +52,14 @@ router.delete('/remove/:id', async (req, res)=> {
     //add functionality that removes associated reviews 
     res.send('Restaurant Removed')
 
+})
+
+router.post('/weather', async (req,res) => {
+    const {lat,long} = req.body
+    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${process.env.OW_API_KEY}`)
+    .then(response => response.json())
+    .then(data => data)
+    .catch(err => console.log(err))
 })
 
 

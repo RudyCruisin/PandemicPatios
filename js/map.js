@@ -124,7 +124,7 @@ async function runApp() {
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(covidCard);
     
     // ADD ATLANTA WEATHER TO WEATHER CARD ON STARTUP OF MAP
-    getWeatherAtlanta()
+    getWeather()
 
     // ADD GEORGIA COVID DATA TO COVID CARD ON STARTUP OF MAP
     getGACovidData()
@@ -220,15 +220,18 @@ async function runApp() {
 function getWeather(placeResult) {
 
     // SET LAT & LONG FOR WEATHER API
-    const lat = placeResult.geometry.location.lat();
-    const long = placeResult.geometry.location.lng();
+    // Default location is based out of HOTLANTA
+    const lat = placeResult ? placeResult.geometry.location.lat() : 33.7537;
+    const long = placeResult ? placeResults.geometry.location.lng() : -84.3863;
 
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
-    .then(response => response.json())
-    .then(data => {
-        //console.log(data);
-        drawWeather(data);
+    fetch('http://localhost:9000/restaurant/weather', {
+        method: 'POST',
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: {lat, long}
     })
+    .then(data => drawWeather(data))
     .catch(err => console.log(err))
 }
 
@@ -245,19 +248,19 @@ function drawWeather(data) {
 }
 
 // WEATHER API STUFF AT STARTUP --> ATLANTA INFO
-function getWeatherAtlanta() {
+// function getWeatherAtlanta() {
 
-    // SET LAT & LONG FOR WEATHER API
-    const lat = 33.7537
-    const long = -84.3863
+//     // SET LAT & LONG FOR WEATHER API
+//     const lat = 33.7537
+//     const long = -84.3863
 
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
-    .then(response => response.json())
-    .then(data => {
-        drawWeather(data);
-    })
-    .catch(err => console.log(err))
-}
+//     fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         drawWeather(data);
+//     })
+//     .catch(err => console.log(err))
+// }
 
 // COVID Data Stuff
 
