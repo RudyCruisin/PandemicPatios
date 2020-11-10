@@ -76,16 +76,16 @@ app.listen(process.env.PORT, () => {
 
 
 // Testing connection to database
-// const { Sequelize } = require('sequelize')
-// const sequelize = new Sequelize(`postgres://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:5432/${process.env.DB_NAME}`)
-// const db = require('./models')
-// db.sequelize.authenticate().then(()=>{ 
-//        console.log("Great Success!")
-//        db.sequelize.sync()
-//        db.Reviews.sync({ alter: true })
-//        db.Restaurant.sync({ alter: true})
-//        db.User.sync({ alter: true })
-//  })
+const { Sequelize } = require('sequelize')
+const sequelize = new Sequelize(`postgres://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:5432/${process.env.DB_NAME}`)
+const db = require('./models')
+db.sequelize.authenticate().then(()=>{ 
+       console.log("Great Success!")
+       db.sequelize.sync()
+       db.Reviews.sync({ alter: true })
+       db.Restaurant.sync({ alter: true})
+       db.User.sync({ alter: true })
+ })
 
 // -----------------------------------------------
 //             Database Routes
