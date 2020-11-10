@@ -210,7 +210,7 @@ async function runApp() {
       // LINK UP WEATHER DATA
       // getWeather(place);
 
-      // LINK UP COVID DATA
+      // LINK UP COVID DATA 
       getCovidData(place);
 
     });

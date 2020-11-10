@@ -29,7 +29,7 @@ async function loggedIn(req, res, next) {
         }
     })
 
-    console.log(review)
+
     if(req.user && review.length == 0){
         next()
     } else{

@@ -19,7 +19,6 @@ router.get('/reviewUser/:authID/:strat', async (req, res)=> {
 })
 
 router.get('/status', (req, res) => {
-    // console.log(req.isAuthenticated())
     res.send(req.isAuthenticated())
 })
 

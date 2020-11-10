@@ -1,5 +1,4 @@
 window.onload = async e => {
-    console.log("page is loaded!")
 
     var userStatus = await fetchStatus("/user/status")
 

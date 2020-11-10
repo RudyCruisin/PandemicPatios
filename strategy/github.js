@@ -23,7 +23,6 @@ passport.use(new GitHubStrategy({
     callbackURL: process.env.GH_CALLBACK
 },
     async function (accessToken, refreshToken, profile, cb) {
-        console.log(("Github Login Successful"))
         let user = await db.User.findOne(
             {
                 where: {

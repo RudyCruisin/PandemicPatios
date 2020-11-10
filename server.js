@@ -50,12 +50,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 passport.serializeUser(function (user, done) {
-    // console.log("from server.js" + user)
     done(null, user);
 })
 
 passport.deserializeUser(function (id, done) {
-    // console.log(id)
     done(null, id);
 })
 
