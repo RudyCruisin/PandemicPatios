@@ -54,12 +54,19 @@ router.delete('/remove/:id', async (req, res)=> {
 
 })
 
-router.post('/weather', async (req,res) => {
-    const {lat,long} = req.body
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${process.env.OW_API_KEY}`)
+router.get('/weather', async (req,res) => {
+    console.log(req.query)
+    const {lat,lng} = req.query
+    console.log(lat,lng)
+    await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=imperial&appid=${process.env.OW_API_KEY}`)
     .then(response => response.json())
     .then(data => data)
     .catch(err => console.log(err))
+})
+
+router.get('/testing123', (req,res) => {
+    console.log("I AM HERE")
+    res.json({"is": "working"})
 })
 
 

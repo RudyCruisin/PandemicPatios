@@ -125,6 +125,7 @@ async function runApp() {
     
     // ADD ATLANTA WEATHER TO WEATHER CARD ON STARTUP OF MAP
     getWeather()
+    // getWeatherAtlanta()
 
     // ADD GEORGIA COVID DATA TO COVID CARD ON STARTUP OF MAP
     getGACovidData()
@@ -217,23 +218,26 @@ async function runApp() {
 }
 // WEATHER API STUFF
 
-function getWeather(placeResult) {
+function getWeather(placeResult=null) {
 
     // SET LAT & LONG FOR WEATHER API
     // Default location is based out of HOTLANTA
     const lat = placeResult ? placeResult.geometry.location.lat() : 33.7537;
-    const long = placeResult ? placeResults.geometry.location.lng() : -84.3863;
+    const lng = placeResult ? placeResult.geometry.location.lng() : -84.3863;
 
-    fetch('http://localhost:9000/restaurant/weather', {
-        method: 'POST',
-        headers: {
-            "Content-Type": 'application/json'
-        },
-        body: {lat, long}
-    })
+    fetch(`http://localhost:9000/restaurant/weather?lat=${lat}&lng=${lng}`)
+    .then(response => response.json())
     .then(data => drawWeather(data))
     .catch(err => console.log(err))
+
+    // fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
+    // .then(response => response.json())
+    // .then(data => {
+    //     drawWeather(data);
+    // })
+    // .catch(err => console.log(err))
 }
+
 
 function drawWeather(data) {
     let roundedTemp = Math.round(parseFloat(data.main.temp))
@@ -250,7 +254,7 @@ function drawWeather(data) {
 // WEATHER API STUFF AT STARTUP --> ATLANTA INFO
 // function getWeatherAtlanta() {
 
-//     // SET LAT & LONG FOR WEATHER API
+// //     // SET LAT & LONG FOR WEATHER API
 //     const lat = 33.7537
 //     const long = -84.3863
 
