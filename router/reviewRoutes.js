@@ -5,7 +5,7 @@ const fetch = require('node-fetch')
 
 
 
-function loggedIn(req, res, next) {
+async function loggedIn(req, res, next) {
     if(req.user){
         let strat;
 
@@ -21,6 +21,10 @@ function loggedIn(req, res, next) {
         else if (req.user.provider == "github") {
             strat = 4
         }
+
+        let review = db.Review.findAll({
+            where
+        })
         next()
     } else {
         res.redirect('/')
