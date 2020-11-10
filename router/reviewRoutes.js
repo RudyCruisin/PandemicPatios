@@ -2,12 +2,15 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 const fetch = require('node-fetch')
-
+if (typeof localStorage === "undefined" || localStorage === null) {
+    var LocalStorage = require('node-localstorage').LocalStorage;
+    localStorage = new LocalStorage('./scratch');
+  }
 
 
 async function loggedIn(req, res, next) {
     let strat;
-
+    let resId = localStorage.getItem("restaurantId");
     if (req.user.provider == "twitter") {
         strat = 1
     }
@@ -24,7 +27,8 @@ async function loggedIn(req, res, next) {
     let authId = await getAuthID(userId, strat)
     let review = await db.Review.findAll({
         where: {
-            UserId: authId
+            UserId: authId,
+            RestaurantId: resId,
         }
     })
 
