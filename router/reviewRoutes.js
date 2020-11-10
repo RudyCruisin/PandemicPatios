@@ -2,15 +2,26 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 const fetch = require('node-fetch')
-if (typeof localStorage === "undefined" || localStorage === null) {
-    var LocalStorage = require('node-localstorage').LocalStorage;
-    localStorage = new LocalStorage('./scratch');
-  }
+var LocalStorage = require('node-localstorage').LocalStorage,
+ localStorage = new LocalStorage('./scratch');
 
+ const asyncLocalStorage = {
+    setItem: function (key, value) {
+        return Promise.resolve().then(function () {
+            localStorage.setItem(key, value);
+        });
+    },
+    getItem: function (key) {
+        return Promise.resolve().then(function () {
+            return localStorage.getItem(key);
+        });
+    }
+};
 
 async function loggedIn(req, res, next) {
     let strat;
-    let resId = localStorage.getItem("restaurantId");
+    const { RestaurantId } = req.body
+
     if (req.user.provider == "twitter") {
         strat = 1
     }
@@ -28,14 +39,14 @@ async function loggedIn(req, res, next) {
     let review = await db.Review.findAll({
         where: {
             UserId: authId,
-            RestaurantId: resId,
+            RestaurantId
         }
     })
 
-
+    console.log(review)
     if(req.user && review.length == 0){
         next()
-    } else {
+    } else{
         res.redirect('/')
     }
 }
