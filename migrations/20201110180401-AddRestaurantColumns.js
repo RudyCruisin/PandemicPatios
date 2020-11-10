@@ -27,7 +27,7 @@ module.exports = {
       'Restaurants',
       'phoneNumber',
       {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       }
     )
     await queryInterface.addColumn(
@@ -53,7 +53,7 @@ module.exports = {
     )
     await queryInterface.addColumn(
       'Restaurants',
-      'long',
+      'lng',
       {
         type: Sequelize.FLOAT
       }
