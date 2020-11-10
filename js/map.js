@@ -71,7 +71,6 @@ function renderMarkers(restaurants, map) {
         google.maps.event.addListener(marker, "click", function (e) {
             infowindow.open(map, marker);
             localStorage.setItem("restaurantId", marker.restaurantId.toString());
-            console.log(marker);
         });
     });
 }

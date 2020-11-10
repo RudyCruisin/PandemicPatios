@@ -6,32 +6,35 @@ const fetch = require('node-fetch')
 
 
 async function loggedIn(req, res, next) {
-    if(req.user){
-        let strat;
+    let strat;
 
-        if (req.user.provider == "twitter") {
-            strat = 1
+    if (req.user.provider == "twitter") {
+        strat = 1
+    }
+    else if (req.user.provider == "facebook") {
+        strat = 2
+    }
+    else if (req.user.provider == "google") {
+        strat = 3
+    }
+    else if (req.user.provider == "github") {
+        strat = 4
+    }
+    let userId = req.user.id;
+    let authId = await getAuthID(userId, strat)
+    let review = await db.Review.findAll({
+        where: {
+            UserId: authId
         }
-        else if (req.user.provider == "facebook") {
-            strat = 2
-        }
-        else if (req.user.provider == "google") {
-            strat = 3
-        }
-        else if (req.user.provider == "github") {
-            strat = 4
-        }
+    })
 
-        let review = db.Review.findAll({
-            where
-        })
+
+    if(req.user && review.length == 0){
         next()
     } else {
         res.redirect('/')
     }
-
 }
-
 
 //Sends every review back
 router.get('/all', async (req, res)=> {
@@ -53,7 +56,6 @@ router.get('/restaurant/:resID', async (req, res)=> {
 router.get('/restaurant/reviews/:resID', async (req, res) => {
     const resID = req.params.resID;
     let allReviews = await avgReviews(resID);
-    console.log("this is allReviews from the router", allReviews);
     reviewsHTML = `<html>
         <head>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -250,7 +252,6 @@ router.delete('/:id', async (req, res)=> {
 })
 
 router.post('/add', loggedIn,  async (req, res)=> {
-    console.log(req.user.provider)
     //gets logged in user's authID
 
 
