@@ -2,18 +2,54 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models');
 const fetch = require('node-fetch')
+var LocalStorage = require('node-localstorage').LocalStorage,
+ localStorage = new LocalStorage('./scratch');
 
+ const asyncLocalStorage = {
+    setItem: function (key, value) {
+        return Promise.resolve().then(function () {
+            localStorage.setItem(key, value);
+        });
+    },
+    getItem: function (key) {
+        return Promise.resolve().then(function () {
+            return localStorage.getItem(key);
+        });
+    }
+};
 
+async function loggedIn(req, res, next) {
+    let strat;
+    const { RestaurantId } = req.body
 
-function loggedIn(req, res, next) {
-    if(req.user){
+    if (req.user.provider == "twitter") {
+        strat = 1
+    }
+    else if (req.user.provider == "facebook") {
+        strat = 2
+    }
+    else if (req.user.provider == "google") {
+        strat = 3
+    }
+    else if (req.user.provider == "github") {
+        strat = 4
+    }
+    let userId = req.user.id;
+    let authId = await getAuthID(userId, strat)
+    let review = await db.Review.findAll({
+        where: {
+            UserId: authId,
+            RestaurantId
+        }
+    })
+
+    console.log(review)
+    if(req.user && review.length == 0){
         next()
-    } else {
+    } else{
         res.redirect('/')
     }
-
 }
-
 
 //Sends every review back
 router.get('/all', async (req, res)=> {
@@ -35,7 +71,6 @@ router.get('/restaurant/:resID', async (req, res)=> {
 router.get('/restaurant/reviews/:resID', async (req, res) => {
     const resID = req.params.resID;
     let allReviews = await avgReviews(resID);
-    console.log("this is allReviews from the router", allReviews);
     reviewsHTML = `<html>
         <head>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -231,8 +266,7 @@ router.delete('/:id', async (req, res)=> {
     res.send(deletedReview)
 })
 
-router.post('/add',  async (req, res)=> {
-    console.log(req.user.provider)
+router.post('/add', loggedIn,  async (req, res)=> {
     //gets logged in user's authID
 
 
