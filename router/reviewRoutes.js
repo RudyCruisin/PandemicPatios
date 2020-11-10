@@ -233,7 +233,6 @@ router.delete('/:id', async (req, res)=> {
 
 router.post('/add',  async (req, res)=> {
     console.log(req.user.provider)
-    console.log("POST!!!!")
     //gets logged in user's authID
 
 
