@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    queryInterface.changeColumn('Restaurant', 'phoneNumber', {
+    queryInterface.changeColumn('Restaurants', 'phoneNumber', {
       type: Sequelize.STRING
     })
   },
