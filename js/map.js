@@ -116,15 +116,15 @@ async function runApp() {
 
     // ADD CUSTOM CARDS TO MAP -- SEARCH, WEATHER, AND COVID STATS
     const searchCard = document.getElementById("pac-card");
-    const weatherCard = document.getElementById("weather-card");
+    // const weatherCard = document.getElementById("weather-card");
     const covidCard = document.getElementById("covid-card");
 
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(searchCard);
-    map.controls[google.maps.ControlPosition.LEFT_TOP].push(weatherCard);
+    // map.controls[google.maps.ControlPosition.LEFT_TOP].push(weatherCard);
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(covidCard);
     
     // ADD ATLANTA WEATHER TO WEATHER CARD ON STARTUP OF MAP
-    getWeatherAtlanta()
+    // getWeatherAtlanta()
 
     // ADD GEORGIA COVID DATA TO COVID CARD ON STARTUP OF MAP
     getGACovidData()
@@ -208,7 +208,7 @@ async function runApp() {
       });
 
       // LINK UP WEATHER DATA
-      getWeather(place);
+      // getWeather(place);
 
       // LINK UP COVID DATA
       getCovidData(place);
