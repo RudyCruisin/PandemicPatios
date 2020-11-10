@@ -231,7 +231,7 @@ router.delete('/:id', async (req, res)=> {
     res.send(deletedReview)
 })
 
-router.post('/add',  async (req, res)=> {
+router.post('/add', loggedIn,  async (req, res)=> {
     console.log(req.user.provider)
     //gets logged in user's authID
 
