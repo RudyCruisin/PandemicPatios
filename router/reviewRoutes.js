@@ -7,6 +7,20 @@ const fetch = require('node-fetch')
 
 function loggedIn(req, res, next) {
     if(req.user){
+        let strat;
+
+        if (req.user.provider == "twitter") {
+            strat = 1
+        }
+        else if (req.user.provider == "facebook") {
+            strat = 2
+        }
+        else if (req.user.provider == "google") {
+            strat = 3
+        }
+        else if (req.user.provider == "github") {
+            strat = 4
+        }
         next()
     } else {
         res.redirect('/')
