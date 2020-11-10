@@ -1,21 +1,25 @@
-body {
-    background-color: slategray;
-    /* color: paleturquoise */
-}
+html,
+    body {
+    height: 90%;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: darkslategray;
+    }
 
-#container {
-    padding: 10vh 20vh 5vh 20vh;
+/* #container {
+    /* padding: 10vh 20vh 5vh 20vh;
     background-image: linear-gradient(to bottom right, violet, paleturquoise);
     display: flex;
     flex-direction: column;
     width: 60%;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
     /* height: auto; */
-    margin-top: 5vh;
+    /* margin-top: 5vh;
     margin-bottom: 5vh;    
-}
-
+} */
+/* 
 #top {
     background-color: purple;
     height: 5vh;
@@ -27,33 +31,22 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
+} */ */
 
 #footer {
-    height:10vh;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    bottom: 0;
+    width: 100%;
+    height: 15%;
     padding: 10px;
-    background-color: #343b3f;
-    color: white;
+    background-color: #f8f9fa;
+    color: darkslategrey;
     text-align: center;
   }
-
-#mid_left {
-    /* width: 50%; */
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    
-}
-
-#mid_right {
-    /* width: 25%; */
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    
-}
 
 .ppLogo{
     width: 100%;

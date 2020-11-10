@@ -13,7 +13,7 @@ const handleSubmit = e => {
     data.append('RestaurantId', restaurantId);
     const stringified = stringifyFormData(data);
     sendReview(stringified);
-    window.close();
+    window.location.assign('/');
 }
 
 //$("#form").on("submit", handleSubmit())
@@ -23,7 +23,7 @@ form.addEventListener('submit', handleSubmit)
 
 
 const sendReview = async (review, RestaurantId)=> {
-    await fetch ('/review/add', {
+    await fetch ('http://localhost:9000/review/add', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
