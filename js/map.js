@@ -208,7 +208,7 @@ async function runApp() {
       });
 
       // LINK UP WEATHER DATA
-      getWeather(place);
+    //   getWeather(place);
 
       // LINK UP COVID DATA
       getCovidData(place);
@@ -217,47 +217,47 @@ async function runApp() {
 }
 // WEATHER API STUFF
 
-function getWeather(placeResult) {
+// function getWeather(placeResult) {
 
-    // SET LAT & LONG FOR WEATHER API
-    const lat = placeResult.geometry.location.lat();
-    const long = placeResult.geometry.location.lng();
+//     // SET LAT & LONG FOR WEATHER API
+//     const lat = placeResult.geometry.location.lat();
+//     const long = placeResult.geometry.location.lng();
 
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
-    .then(response => response.json())
-    .then(data => {
-        //console.log(data);
-        drawWeather(data);
-    })
-    .catch(err => console.log(err))
-}
+//     fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         //console.log(data);
+//         drawWeather(data);
+//     })
+//     .catch(err => console.log(err))
+// }
 
-function drawWeather(data) {
-    let roundedTemp = Math.round(parseFloat(data.main.temp))
-    let iconcode = data.weather[0].icon;
-    let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+// function drawWeather(data) {
+//     let roundedTemp = Math.round(parseFloat(data.main.temp))
+//     let iconcode = data.weather[0].icon;
+//     let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
 
-    document.getElementById('weather-icon').src = iconurl;
-    document.getElementById('location').innerHTML = data.name;
-    document.getElementById('description').innerHTML = data.weather[0].description;
-    document.getElementById('temp').innerHTML = roundedTemp + '&#8457;';
-    document.getElementById('humidity').innerHTML = data.main.humidity + '% Humidity';
-}
+//     document.getElementById('weather-icon').src = iconurl;
+//     document.getElementById('location').innerHTML = data.name;
+//     document.getElementById('description').innerHTML = data.weather[0].description;
+//     document.getElementById('temp').innerHTML = roundedTemp + '&#8457;';
+//     document.getElementById('humidity').innerHTML = data.main.humidity + '% Humidity';
+// }
 
 // WEATHER API STUFF AT STARTUP --> ATLANTA INFO
-function getWeatherAtlanta() {
+// function getWeatherAtlanta() {
 
-    // SET LAT & LONG FOR WEATHER API
-    const lat = 33.7537
-    const long = -84.3863
+//     // SET LAT & LONG FOR WEATHER API
+//     const lat = 33.7537
+//     const long = -84.3863
 
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
-    .then(response => response.json())
-    .then(data => {
-        drawWeather(data);
-    })
-    .catch(err => console.log(err))
-}
+//     fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         drawWeather(data);
+//     })
+//     .catch(err => console.log(err))
+// }
 
 // COVID Data Stuff
 
