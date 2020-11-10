@@ -28,19 +28,6 @@ module.exports = {
         onDelete: 'SET NULL',
       }
     )
-    await queryInterface.addColumn(
-      'Users',
-      'authStrat',
-      {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'oAuths',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-      }
-    )
   },
 
   down: async (queryInterface, Sequelize) => {
