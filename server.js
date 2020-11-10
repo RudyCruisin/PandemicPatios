@@ -59,7 +59,7 @@ passport.deserializeUser(function (id, done) {
     done(null, id);
 })
 
-app.use('/auth/github', gh_auth)
+app.use('https://pandemicpatiosdev.herokuapp.com/auth/github/', gh_auth)
 app.use('/auth/facebook', fb_auth)
 app.use('/auth/google', google_auth)
 app.use('/auth/twitter', twit_auth)
