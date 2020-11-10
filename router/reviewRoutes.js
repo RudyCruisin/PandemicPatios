@@ -61,9 +61,22 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
         <head>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             <link rel="stylesheet" href="/review.css">
+            <link rel="stylesheet" href="../css/style.css">
             </head>
 
         <body>
+            <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                <a class="navbar-brand" href="/">
+                    <img
+                    src="images/pandemic-patios-horizontal.png"
+                    height="30"
+                    class="d-inline-block align-top"
+                    alt=""
+                    loading="lazy"
+                    />
+                </a>
+            </nav>
+
            <div class="container">
                 <h1 class="name">${allReviews.name}</h1>
                 <h4 class="review-total">${allReviews.total} Reviews</h4>
@@ -116,6 +129,18 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
             </div>
         </div>
 
+        <div id="footer">
+        <img id="logo" src="/images/pandemic-patios-circle.png" />
+        <p id="copyright">
+          Copyright &copy;
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          <br />
+          Pandemic Patios
+        </p>
+      </div>
+
         </body>
     </html>`
 
@@ -123,9 +148,22 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
         <head>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             <link rel="stylesheet" href="/review.css">
+            <link rel="stylesheet" href="../css/style.css">
             </head>
 
         <body>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+          <img
+            src="images/pandemic-patios-horizontal.png"
+            height="30"
+            class="d-inline-block align-top"
+            alt=""
+            loading="lazy"
+          />
+        </a>
+  
+      </nav>
         <div class="container">
                 <h1 class="name">${allReviews.name}</h1>
                 <h4 class="review-total">There are no reviews yet.</h4>
@@ -133,6 +171,18 @@ router.get('/restaurant/reviews/:resID', async (req, res) => {
             <div class="reviews">
                 <div class="covid">
         </body>
+
+        <div id="footer">
+        <img id="logo" src="/images/pandemic-patios-circle.png" />
+        <p id="copyright">
+          Copyright &copy;
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          <br />
+          Pandemic Patios
+        </p>
+      </div>
     </html>`
 
     if(allReviews.total === 0){
