@@ -10,7 +10,7 @@
 ---
 
 ## Our Purpose
-We are a COVID-era, yelp-style review site for outdoor dining. We provide our users with patron-rated information on how specific restaurants are handling social-distancing, sanitation, mask mandates, etc. Winter is Coming! How are patios accommodating cold or rainy weather? Head over to [PandemicPatios](heroku site TBD) to find out!
+We are a COVID-era, yelp-style review site for outdoor dining. We provide our users with patron-rated information on how specific restaurants are handling social-distancing, sanitation, mask mandates, etc. Winter is Coming! How are patios accommodating cold or rainy weather? Head over to [PandemicPatios](https://pandemicpatiosdev.herokuapp.com/) to find out!
 
 ---
 
@@ -64,4 +64,4 @@ We are a COVID-era, yelp-style review site for outdoor dining. We provide our us
 
 ## License
 
-MIT. See [LICENSE](./LICENSE)
+MIT. See [LICENSE](./LICENSE.md)
