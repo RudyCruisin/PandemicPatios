@@ -16,6 +16,11 @@ body {
   width: 100%;
   }
 
+#page-body {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #locationField,
 #controls {
   width: 600px;
