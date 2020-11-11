@@ -44,7 +44,7 @@ let restaurantMarkers = [];
 
 // RENDER FUNCTION FOR RESTAURANT MARKERS
 function renderMarkers(restaurants, map) {
-    console.log("you are in renderMarkers", restaurants);
+    
     restaurants.forEach((currentRestaurant) => {
 
         // CREATES A MARKER
@@ -63,7 +63,7 @@ function renderMarkers(restaurants, map) {
         let infowindow = new google.maps.InfoWindow({
             content: `<h6>${marker.restaurantName}</h6>
             <p>Phone Number:${marker.restaurantPhone}</p>
-            <a href="/review/restaurant/reviews/${marker.restaurantId}" target="_blank">See Reviews</a>
+            <a href="/review/restaurant/reviews/${marker.restaurantId}">See Reviews</a>
             `
         });
 
@@ -71,7 +71,6 @@ function renderMarkers(restaurants, map) {
         google.maps.event.addListener(marker, "click", function (e) {
             infowindow.open(map, marker);
             localStorage.setItem("restaurantId", marker.restaurantId.toString());
-            console.log(marker);
         });
     });
 }
@@ -91,7 +90,6 @@ function renderMarkersInBoundary(restaurants, boundaryCir, map) {
     // A NEW ARRAY FOR ONLY THE MARKERS WITHIN THE BOUNDARY
     let restaurantsInBoundary = [];
 
-    console.log("you are in renderMarkersInBoundary", restaurants);
     // GETS LAT/LONGS OF CURRENT RESTAURANT & BOUNDARY CENTER & THEN USES GEOMETRY LIBRARY TO FIND THE DISTANCE BETWEEN
     restaurants.forEach((currentRestaurant) => {
         let marker_lat_lng = new google.maps.LatLng(currentRestaurant.lat, currentRestaurant.lng);
@@ -117,15 +115,15 @@ async function runApp() {
 
     // ADD CUSTOM CARDS TO MAP -- SEARCH, WEATHER, AND COVID STATS
     const searchCard = document.getElementById("pac-card");
-    const weatherCard = document.getElementById("weather-card");
+    // const weatherCard = document.getElementById("weather-card");
     const covidCard = document.getElementById("covid-card");
 
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(searchCard);
-    map.controls[google.maps.ControlPosition.LEFT_TOP].push(weatherCard);
+    // map.controls[google.maps.ControlPosition.LEFT_TOP].push(weatherCard);
     map.controls[google.maps.ControlPosition.LEFT_TOP].push(covidCard);
     
     // ADD ATLANTA WEATHER TO WEATHER CARD ON STARTUP OF MAP
-    getWeatherAtlanta()
+    // getWeatherAtlanta()
 
     // ADD GEORGIA COVID DATA TO COVID CARD ON STARTUP OF MAP
     getGACovidData()
@@ -209,56 +207,57 @@ async function runApp() {
       });
 
       // LINK UP WEATHER DATA
-      getWeather(place);
+    //   getWeather(place);
 
-      // LINK UP COVID DATA
+
+      // LINK UP COVID DATA 
       getCovidData(place);
 
     });
 }
 // WEATHER API STUFF
 
-function getWeather(placeResult) {
+// function getWeather(placeResult) {
 
-    // SET LAT & LONG FOR WEATHER API
-    const lat = placeResult.geometry.location.lat();
-    const long = placeResult.geometry.location.lng();
+//     // SET LAT & LONG FOR WEATHER API
+//     const lat = placeResult.geometry.location.lat();
+//     const long = placeResult.geometry.location.lng();
 
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
-    .then(response => response.json())
-    .then(data => {
-        //console.log(data);
-        drawWeather(data);
-    })
-    .catch(err => console.log(err))
-}
+//     fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         //console.log(data);
+//         drawWeather(data);
+//     })
+//     .catch(err => console.log(err))
+// }
 
-function drawWeather(data) {
-    let roundedTemp = Math.round(parseFloat(data.main.temp))
-    let iconcode = data.weather[0].icon;
-    let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+// function drawWeather(data) {
+//     let roundedTemp = Math.round(parseFloat(data.main.temp))
+//     let iconcode = data.weather[0].icon;
+//     let iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
 
-    document.getElementById('weather-icon').src = iconurl;
-    document.getElementById('location').innerHTML = data.name;
-    document.getElementById('description').innerHTML = data.weather[0].description;
-    document.getElementById('temp').innerHTML = roundedTemp + '&#8457;';
-    document.getElementById('humidity').innerHTML = data.main.humidity + '% Humidity';
-}
+//     document.getElementById('weather-icon').src = iconurl;
+//     document.getElementById('location').innerHTML = data.name;
+//     document.getElementById('description').innerHTML = data.weather[0].description;
+//     document.getElementById('temp').innerHTML = roundedTemp + '&#8457;';
+//     document.getElementById('humidity').innerHTML = data.main.humidity + '% Humidity';
+// }
 
 // WEATHER API STUFF AT STARTUP --> ATLANTA INFO
-function getWeatherAtlanta() {
+// function getWeatherAtlanta() {
 
-    // SET LAT & LONG FOR WEATHER API
-    const lat = 33.7537
-    const long = -84.3863
+//     // SET LAT & LONG FOR WEATHER API
+//     const lat = 33.7537
+//     const long = -84.3863
 
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
-    .then(response => response.json())
-    .then(data => {
-        drawWeather(data);
-    })
-    .catch(err => console.log(err))
-}
+//     fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${OW_API_KEY}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         drawWeather(data);
+//     })
+//     .catch(err => console.log(err))
+// }
 
 // COVID Data Stuff
 

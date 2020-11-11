@@ -7,7 +7,7 @@ const { route } = require('../strategy/google');
 //Adds a restaurant to the Restaurant table with fields from request body
 router.post('/add', async (req, res)=> {
     const { name, street_number, route, locality, administrative_area_level_1, postal_code, phoneNumber, lat, lng } = req.body
-    console.log(req.body);
+
     const newRestaurant = await db.Restaurant.create({
         name,
         streetNumber: street_number,

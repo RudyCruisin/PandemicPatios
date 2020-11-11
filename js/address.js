@@ -26,7 +26,6 @@ function initAutocomplete() {
 function fillInAddress() {
   // Get the place details from the autocomplete object.
   const place = autocomplete.getPlace();
-  console.log("this is the place", place);
 
   for (const component in componentForm) {
     document.getElementById(component).value = "";
@@ -77,14 +76,13 @@ const handleSubmit = e => {
   const data = new FormData(e.target);
   const stringified = stringifyFormData(data)
   sendBusiness(stringified);
-  window.close();
+  window.location.assign('/');
 }
 
 const form = document.getElementById('businessForm')
 form.addEventListener('submit', handleSubmit);
 
 const sendBusiness = async (restaurantAddress)=> {
-  console.log(restaurantAddress)
   await fetch ('/restaurant/add', {
       method: 'POST',
       headers: {

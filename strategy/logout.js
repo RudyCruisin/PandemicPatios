@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
     // req.session.destroy(function (err) {
     // res.clearCookie('connect.sid')
     res.redirect('/')
-    console.log('You are logged out.')
     // })
 })
 

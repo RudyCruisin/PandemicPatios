@@ -13,7 +13,7 @@ const handleSubmit = e => {
     data.append('RestaurantId', restaurantId);
     const stringified = stringifyFormData(data);
     sendReview(stringified);
-    window.close();
+    window.location.assign('/');
 }
 
 //$("#form").on("submit", handleSubmit())
