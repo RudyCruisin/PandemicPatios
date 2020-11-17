@@ -3,9 +3,26 @@ const router = express.Router();
 const db = require('../models');
 const { route } = require('../strategy/google');
 
+// CHECKS IF LOGGEN IN
+async function loggedIn(req, res, next) {
+    const { lat, lng } = req.body;
+
+    let restaurant = await db.Restaurant.findAll({
+        where: {
+            lat: lat,
+            lng: lng
+        }
+    })
+
+    if(req.user && restaurant.length === 0){
+        next()
+    } else{
+        res.redirect('/')
+    }
+}
 
 //Adds a restaurant to the Restaurant table with fields from request body
-router.post('/add', async (req, res)=> {
+router.post('/add', loggedIn, async (req, res)=> {
     const { name, street_number, route, locality, administrative_area_level_1, postal_code, phoneNumber, lat, lng } = req.body
 
     const newRestaurant = await db.Restaurant.create({
